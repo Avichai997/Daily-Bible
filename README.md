@@ -47,9 +47,9 @@ To run the app client + server side in development MODE you have two methods ava
 
 1. Automatically (**recommended**):
 
-   - [Clone the repo from Azure Devops](https://dev.azure.com/avichai997/_git/Final%20Project).
+   - [Clone the repo from Github](https://github.com/Avichai997/Daily-Bible.git).
    - Install VS Code extension: [Restore Terminals](https://marketplace.visualstudio.com/items?itemName=EthanSK.restore-terminals)
-   - Re-open VsCode and then open the file "FinalProject.code-workspace" inside the root folder.
+   - Re-open VsCode and then open the file "DailyBible.code-workspace" inside the root folder.
      It will open vs code with terminals for server & client, navigate to the folders directory, install npm packages and start the apps. A new window of your default browser will automatically open at "http://localhost:3000" - the default start page of the client app.
 
 2. Manually:
@@ -71,7 +71,7 @@ To run the app client + server side in development MODE you have two methods ava
 
 - Open Postman
 - Click on "Create Workspace", hit "Next", enter name of workspace: "Daily Bible", Click on "Create".
-- Type CTRL + O to open import popup, click on "folders" and import the 2 folders located inside "YOUR_PROJECT_LOCATION\Final Project\server\Seed\Postman Backup".
+- Type CTRL + O to open import popup, click on "folders" and import the 2 folders located inside "YOUR_PROJECT_LOCATION\Daily-Bible\server\src\Seed\Postman Backup".
 - wait for the files to load and click on "Import" button.
 - In Postman click on "Collections" button in the left bar.
 - At the top right corner of the screen under  the "Upgrade" button click on "No Environment" select box and choose "Dev: Daily Bible".

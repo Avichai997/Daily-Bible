@@ -2,22 +2,22 @@
   "compilerOptions": {
     "target": "ESNext",
     "types": ["node"],
-    "rootDir": "",
+    "rootDir": ".",
     "sourceMap": true,
     "moduleResolution": "Node",
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"],
       "@public/*": ["public/*"],
-      "@Services/*": ["Services/*"],
-      "@Controllers/*": ["Controllers/*"],
-      "@Middlewares/*": ["Middlewares/*"],
-      "@Models/*": ["Models/*"],
-      "@Routes/*": ["Routes/*"],
-      "@Interfaces/*": ["Interfaces/*"],
-      "@Utils/*": ["Utils/*"],
-      "@Views/*": ["Views/*"],
-      "@Seed/*": ["Seed/*"]
+      "@Services/*": ["src/Services/*"],
+      "@Controllers/*": ["src/Controllers/*"],
+      "@Middlewares/*": ["src/Middlewares/*"],
+      "@Models/*": ["src/Models/*"],
+      "@Routes/*": ["src/Routes/*"],
+      "@Interfaces/*": ["src/Interfaces/*"],
+      "@Utils/*": ["src/Utils/*"],
+      "@Views/*": ["src/Views/*"],
+      "@Seed/*": ["src/Seed/*"]
     },
     "allowJs": true,
     "checkJs": true,
@@ -29,6 +29,6 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": [".", ".eslintrc.cjs"],
+  "include": ["src", ".eslintrc.cjs"],
   "exclude": ["node_modules", "build*/", "dist*/", "Seed/Postman Backup"]
 }
