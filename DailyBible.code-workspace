@@ -1,0 +1,70 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "restoreTerminals.keepExistingTerminalsOpen": false,
+    "restoreTerminals.terminals": [
+      {
+        "splitTerminals": [
+          {
+            "name": "Server",
+            "commands": [
+              "cd server",
+              "npm set legacy-peer-deps true",
+              "npm i",
+              "npm run huskyInit",
+              "npm run start:dev"
+            ]
+          },
+          {
+            "name": "Client",
+            "commands": ["cd client", "npm i", "npm run huskyInit", "npm run start:dev"]
+          }
+        ]
+      }
+    ],
+    "typescript.tsdk": "client/node_modules/typescript/lib",
+    "eslint.workingDirectories": [
+      {
+        "mode": "auto"
+      }
+    ],
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "files.autoSave": "afterDelay",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.mouseWheelZoom": true,
+    "prettier.printWidth": 100,
+    "eslint.enable": true,
+    "eslint.validate": ["typescript", "javascript", "html"],
+    "editor.formatOnType": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#93e6fc",
+      "activityBar.background": "#93e6fc",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#fa45d4",
+      "activityBarBadge.foreground": "#15202b",
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#93e6fc",
+      "statusBar.background": "#61dafb",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#2fcefa",
+      "statusBarItem.remoteBackground": "#61dafb",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#61dafb",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#61dafb99",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#61dafb",
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true
+  }
+}

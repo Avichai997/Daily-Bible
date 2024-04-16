@@ -1,0 +1,14 @@
+# global ignores:
+.vs
+build*/
+dist*/
+node_modules
+package-lock.json
+.cspellcache
+ .eslintcache
+
+# server ignores:
+server/Seed/Postman Backup
+
+# client ignores:
+client/.vite

@@ -1,0 +1,99 @@
+.mainPage {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background: #2f4f4f;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  gap: 4rem;
+  font-size: 1.5rem;
+  z-index: 2;
+}
+.searchField {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  padding-top: 8rem;
+
+  div.MuiAutocomplete-root div.MuiOutlinedInput-root {
+    /* Search bar when not in focus */
+    border-radius: 40px;
+    // background-color: $dark-color;
+  }
+
+  div.MuiAutocomplete-root div.MuiOutlinedInput-root.Mui-focused {
+    /* Search bar when focused */
+    border-radius: 20px 20px 0px 0px !important;
+  }
+
+  div.MuiAutocomplete-root div.Mui-focused fieldset {
+    /* fieldset element is what controls the border color. Leaving only the bottom border when dropdown is visible */
+    border-width: 1px !important;
+    border-color: lightgrey !important;
+  }
+
+  .MuiAutocomplete-listbox {
+    /* To control the background color of the listbox, which is the dropdown */
+    // background-color: $dark-color;
+  }
+
+  div.MuiAutocomplete-popper div {
+    /* To get rid of the rounding applied by Mui-paper on the dropdown */
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+  }
+}
+
+.mainCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 2rem;
+  margin: 4rem;
+  background: rgba(225, 225, 225, 0.13);
+  border-radius: 2rem;
+}
+
+.dataCard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+@media (max-width: 1247px) {
+  .dataCard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 1247px) {
+  //
+  .dataCard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 985px) {
+  .dataCard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 720px) {
+  //
+  .dataCard {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+}

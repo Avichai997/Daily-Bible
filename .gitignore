@@ -1,0 +1,15 @@
+# global ignores:
+.vs
+.cspellcache
+.vite
+.eslintcache
+
+# client ignores:
+client/node_modules
+client/package-lock.json
+client/build*/
+
+# server ignores:
+server/node_modules
+server/package-lock.json
+server/build/*

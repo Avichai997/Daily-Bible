@@ -1,0 +1,111 @@
+@font-face {
+  font-family: Rubik;
+  src: url(./Assets/Fonts/Rubik-Regular.ttf);
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Rubik;
+  font-style: normal;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+}
+button:not(:disabled) {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+:root {
+  // sizes
+  --laptop-width: 1024px;
+  --tablet-width: 1024px;
+  // color palette
+  --color-light-blue: #e3eeff;
+  --color-azure: #45b0ec;
+  --color-blue: #009be5;
+  --color-royal-blue: #0068f5;
+  --color-shual: #354067;
+  --color-disabled-button: #e3e3e3;
+  --color-separator: #9e9c9c;
+  --color-disabled-text: #929396;
+  --color-box-shadow: #0000001a;
+  --color-box-shadow2: rgba(0, 0, 0, 15%);
+  --color-lighter-grey: #cccccc;
+  --color-light-grey: #bdbdbd;
+  --color-grey: #627488;
+  --color-hover: #f4f8fe;
+  --color-white: white;
+  --color-disable-text: #8596af;
+  --color-pale-peach: #ffe0ce;
+  --color-pinkish-red: #ffc7c7;
+  --color-red: #d41004;
+  --color-radiant-red: #ff1744;
+  --color-orange: #e39522;
+  --color-dark-orange: #ea8713;
+  --color-bold-orange: #e25809;
+  --color-yellow: #fff1cc;
+  --color-light-yellow: #fff9c8;
+  --color-muddy-yellow: #b4a200;
+  --color-light-green: #d6f2d3;
+  --color-radiant-green: #00e676;
+  --color-green: #15c811;
+  --color-dark-green: #026a00;
+  --color-black: #000000;
+  --color-background-card-settings: #f7f8fa;
+  --color-assignment-table-level2: #f8fffe;
+  --color-assignment-table-level3: #eff9f7;
+  --color-black-border: rgba(0, 0, 0, 25%);
+  --color-black-border2: rgba(0, 0, 0, 10%);
+  --color-goal-azure: #d5e1f4;
+  --color-red-linear-gradient: linear-gradient(
+    0deg,
+    var(--color-pinkish-red) -56.42%,
+    var(--color-red) 56.42%
+  );
+  --color-dark-orange-linear-gradient: linear-gradient(
+    0deg,
+    var(--color-white) -56.42%,
+    var(--color-dark-orange) 56.42%
+  );
+  --color-grey-linear-gradient: linear-gradient(
+    0deg,
+    var(--color-disabled-button) -56.42%,
+    var(--color-separator) 56.42%
+  );
+  --color-green-linear-gradient: linear-gradient(
+    0deg,
+    var(--color-white) -56.42%,
+    var(--color-green) 56.42%
+  );
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+  overflow-y: hidden;
+  direction: rtl;
+}
+a {
+  text-decoration: none;
+}
+.ReactQueryDevtools {
+  direction: ltr;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-disabled-text);
+  border-radius: 8px;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: inherit;
+}
