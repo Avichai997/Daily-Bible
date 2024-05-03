@@ -61,11 +61,11 @@ export const useAuth = () => {
       role: userResponse.data.role,
     };
 
-    localStorage.setItem('user', JSON.stringify(userDetails));
-    queryClient.setQueryData(['user'], userDetails);
+    localStorage.setItem(USER_QUERY_KEY, JSON.stringify(userDetails));
+    queryClient.setQueryData([USER_QUERY_KEY], userDetails);
   };
 
-  const getUser = () => queryClient.getQueryData(['user']);
+  const getUser = () => queryClient.getQueryData([USER_QUERY_KEY]);
 
   const { mutate: SignupUser, ...signupUserMutateInfo } = useMutation<
     ILoginSignupResponse,

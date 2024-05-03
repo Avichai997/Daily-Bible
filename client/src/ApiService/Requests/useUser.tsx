@@ -10,7 +10,7 @@ export const useUser = () => {
 
   const checkUser = async (queryClient: QueryClient) => {
     // dummy function - check if user stored in react query cache and return it.
-    const user = queryClient.getQueryData<IUserLocalStorage>(['user']);
+    const user = queryClient.getQueryData<IUserLocalStorage>([USER_QUERY_KEY]);
 
     // eslint-disable-next-line prefer-promise-reject-errors
     return typeof user === 'undefined' ? Promise.reject(null) : Promise.resolve(user);
@@ -20,7 +20,9 @@ export const useUser = () => {
     // This function handles user authentication global state
 
     // 1) Check if user stored in local storage
-    const storedUser = JSON.parse(localStorage.getItem('user') as string) as IUserLocalStorage;
+    const storedUser = JSON.parse(
+      localStorage.getItem(USER_QUERY_KEY) as string
+    ) as IUserLocalStorage;
     if (!storedUser) return undefined;
 
     // 2) check if user's token expired, if so - log the user out.
@@ -31,8 +33,8 @@ export const useUser = () => {
     if (!tokenIsValid && !logoutTimeoutId) {
       // logoutUser() is async function so we set user = undefined in localStorage and in react query cache
       // to prevent getStoredUser function from being called again and run logoutUser() again
-      localStorage.setItem('user', JSON.stringify(null));
-      QueryClient.setQueryData(['user'], undefined);
+      localStorage.setItem(USER_QUERY_KEY, JSON.stringify(null));
+      QueryClient.setQueryData([USER_QUERY_KEY], undefined);
       logoutUser(true);
 
       return undefined;

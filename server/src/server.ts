@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import app from './app';
 import { NODE_ENV, PORT, DB_USERNAME, DB_PASSWORD, DB_NAME, HOST } from '@Utils/environment';
 import AppError from '@Utils/AppError';
+import app from './app';
 
 // Catch uncaughtException errors in server.
 process.on('uncaughtException', (err) => {

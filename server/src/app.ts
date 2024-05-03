@@ -19,13 +19,13 @@ import {
   loginLimiterMiddleware,
 } from '@Middlewares/security';
 import { StatusCodes } from 'http-status-codes';
-import { version } from './package.json';
+import { version } from '../package.json';
 
 const app = express();
 
 // app.options('*', cors());
 app.use(express.json({ limit: '100kb' }));
-app.use(express.urlencoded({ extended: true, limit: '100kb' }));
+app.use(express.urlencoded({ extended: true, limit: '4000kb' }));
 app.use(cookieParser());
 
 app.use(express.static('./public'));
