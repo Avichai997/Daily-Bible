@@ -75,7 +75,10 @@ module.exports = {
     'jsx-a11y/rule-name': 'off',
     'jsx-a11y/alt-text': 'off',
     '@typescript-eslint/dot-notation': 'off',
-    '@cspell/spellchecker': ['error', { checkComments: true, autoFix: true }],
+    '@cspell/spellchecker': [
+      'error',
+      { checkComments: true, autoFix: true, cspell: { import: ['../cspell.json'] } },
+    ],
     '@typescript-eslint/no-unused-vars': 'error',
     'import/no-extraneous-dependencies': [
       'error',

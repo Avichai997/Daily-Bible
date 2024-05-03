@@ -5,7 +5,7 @@ import { useUser } from '@ApiService/Requests/useUser';
 // Pages
 import {
   ProjectStatusPage,
-  AdminPage,
+  HomePage,
   NoMatchPage,
   LoginPage,
   SignUpPage,
@@ -26,12 +26,12 @@ const App = () => {
           path='/'
           element={
             <ProtectRoute>
-              <AdminPage />
+              <HomePage />
             </ProtectRoute>
           }
         >
-          <Route path='user/Profile' element={<ProfilePage />} />
-          <Route path='user/UpdatePassword' element={<UpdatePasswordPage />} />
+          <Route path='/Profile' element={<ProfilePage />} />
+          <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
         </Route>
 
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />

@@ -125,7 +125,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"passwordCurrent\": \"pass1234\",\r\n    \"password\": \"Motorola3!\",\r\n    \"passwordConfirm\": \"Motorola3!\"\r\n}",
+          "raw": "{\r\n    \"currentPassword\": \"pass1234\",\r\n    \"password\": \"Motorola3!\",\r\n    \"passwordConfirm\": \"Motorola3!\"\r\n}",
           "options": { "raw": { "language": "json" } }
         },
         "url": {

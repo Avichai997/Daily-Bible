@@ -55,7 +55,8 @@ const labelStyle = {
   margin: '0 !important',
 };
 
-interface switchProps {
+interface ISwitchProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   toggleFn: any;
   switchSx?: SxProps<Theme> | undefined;
   labelSx?: SxProps<Theme> | undefined;
@@ -64,14 +65,14 @@ interface switchProps {
   initialState?: boolean;
 }
 
-const Switch: React.FC<switchProps> = ({
+const Switch = ({
   toggleFn,
   switchSx = switchStyle,
   labelSx = labelStyle,
   titleOn = '',
   titleOff = '',
   initialState = false,
-}: switchProps) => {
+}: ISwitchProps) => {
   const [isOn, setIsOn] = useState(initialState);
 
   return (

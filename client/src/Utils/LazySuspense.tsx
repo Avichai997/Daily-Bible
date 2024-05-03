@@ -25,7 +25,7 @@ export const ProjectStatusPage = LazySuspense(
 );
 export const LoginPage = LazySuspense(lazy(() => import('@Pages/Login/Login')));
 export const SignUpPage = LazySuspense(lazy(() => import('@Pages/Signup/Signup')));
-export const AdminPage = LazySuspense(lazy(() => import('@Pages/Admin/Admin')));
+export const HomePage = LazySuspense(lazy(() => import('@Pages/Home/Home')));
 export const ProfilePage = LazySuspense(lazy(() => import('@Pages/Profile/Profile')));
 export const DashboardPage = LazySuspense(lazy(() => import('@Pages/Dashboard/Dashboard')));
 export const UpdatePage = LazySuspense(lazy(() => import('@Pages/Update/Update')));

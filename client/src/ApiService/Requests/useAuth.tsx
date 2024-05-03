@@ -134,6 +134,7 @@ export const useAuth = () => {
       {
         onSuccess: (res) => {
           ToastSuccess('ההרשמה בוצעה בהצלחה!');
+          ToastSuccess(`שלום ${res.data.name}`);
           updateLocaleStorage(res);
           navigate(location?.state?.path || '/', { replace: true });
         },
@@ -156,7 +157,11 @@ export const useAuth = () => {
         onSuccess: (res) => {
           ToastSuccess(`שלום ${res.data.name}`);
           updateLocaleStorage(res);
-          navigate(location?.state?.path || '/', { replace: true });
+          navigate(
+            // location?.state?.path ||
+            '/',
+            { replace: true }
+          );
         },
         ...options,
       }
@@ -210,7 +215,7 @@ export const useAuth = () => {
       {
         onSuccess: (res) => {
           ToastSuccess('!עדכון נתונים בוצע בהצלחה');
-          const { tokenExpiration } = queryClient.getQueryData(['user']) as IUserLocalStorage;
+          const { tokenExpiration } = queryClient.getQueryData(['users']) as IUserLocalStorage;
           updateLocaleStorage({ ...res, tokenExpiration });
         },
         ...options,

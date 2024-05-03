@@ -13,7 +13,7 @@ import { SidebarRoutesArray } from './SidebarMenu';
 const routes: Array<SidebarRoutesArray> = [
   {
     path: '', // default path
-    name: 'Dashboard',
+    name: 'בית',
     icon: House,
   },
   {
@@ -39,18 +39,18 @@ const routes: Array<SidebarRoutesArray> = [
     ],
   },
   {
-    path: 'user/Profile',
+    path: 'Profile',
     name: 'פרופיל',
     icon: AccountCircle,
   },
   {
-    path: 'user/UpdatePassword',
+    path: 'UpdatePassword',
     name: 'שינוי סיסמה',
     icon: Pattern,
   },
   {
-    path: '/',
-    name: 'לדף הבית',
+    path: '/dashboard',
+    name: 'דשבורד',
     icon: Dashboard,
   },
   {
