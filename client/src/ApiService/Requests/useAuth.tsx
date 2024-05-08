@@ -175,7 +175,7 @@ export const useAuth = () => {
     LogoutUser(
       {
         method: 'Get',
-        path: USER_QUERY_KEY,
+        path: `${USER_QUERY_KEY}/logout`,
         data: null,
       },
       {

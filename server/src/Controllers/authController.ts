@@ -150,7 +150,6 @@ export const login = catchAsync(async (req, res, next) => {
 
 export const logout: RequestHandler = (_req, res) => {
   res.cookie('token', 'loggedout', {
-    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
   res.status(StatusCodes.OK).json({ status: 'success', token: '' });

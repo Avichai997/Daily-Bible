@@ -13,12 +13,14 @@ import {
   UpdatePasswordPage,
   ErrorFallback,
 } from '@Utils/LazySuspense';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
 const App = () => {
+  const { reset } = useQueryErrorResetBoundary();
   useUser();
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <ErrorBoundary onReset={reset} fallbackRender={} FallbackComponent={ErrorFallback}>
       <Routes>
         <Route path='/Login' element={<LoginPage />} />
         <Route path='/SignUp' element={<SignUpPage />} />
@@ -30,6 +32,7 @@ const App = () => {
             </ProtectRoute>
           }
         >
+          <Route index element={<div>HOME PAGE BITCH</div>} />
           <Route path='/Profile' element={<ProfilePage />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
         </Route>

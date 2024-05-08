@@ -30,15 +30,15 @@ router
   // .post('/forgotPassword', forgotPassword)
   .patch('/resetPassword/:token', resetPassword)
   // .post('/sendConfirmEmail', sendConfirmEmail)
-
+  
   .use(protect)
   // Protect all this routes after this middleware. this routes is only for signed-in users.
   // .post('/confirmEmail', confirmEmail)
-  .patch('/updateMyPassword', updatePassword)
+  .get('/logout', logout)
   .get('/me', getMe, getUser)
   .patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe)
+  .patch('/updateMyPassword', updatePassword)
   .delete('/deleteMe', deleteMe)
-  .get('/logout', logout)
   // Restrict all this routes to Admin only.
   .use(restrictTo('admin'));
 
