@@ -4,7 +4,7 @@
   "version": "1.0.5",
   "type": "module",
   "scripts": {
-    "prepare": "cd.. && husky && cd .husky/_ && del /f .gitignore",
+    "prepare": "cd .. && husky ./.husky",
     "start:dev": "vite --mode development",
     "start:prod": "vite --mode prod",
     "build:dev": "vite build --mode development",
