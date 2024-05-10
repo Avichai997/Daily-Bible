@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "${0%/*}/h"
+
+cd server && npm run lint && cd client && npm run lint
