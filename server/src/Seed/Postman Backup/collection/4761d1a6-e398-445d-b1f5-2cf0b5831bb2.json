@@ -28,7 +28,7 @@
             {
               "key": "fields",
               "value": "shualCityId, lams,name,isTraining,isEnabled,logo,customerTypeId",
-              "description": "selcet specific fields",
+              "description": "select specific fields",
               "disabled": true
             },
             { "key": "page", "value": "1", "description": "pagination", "disabled": true },

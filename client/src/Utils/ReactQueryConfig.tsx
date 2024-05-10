@@ -61,8 +61,6 @@ async function queryErrorHandler(error: Error | AxiosError | unknown) {
     console.error(errorMsg);
 
   ToastError(errorMsg);
-
-  throw error;
 }
 
 export const createQueryClient = (options?: QueryClientConfig) => {

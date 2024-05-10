@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Container, Typography } from '@mui/material';
 import { VpnKeyOff } from '@mui/icons-material';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import PasswordInput from '@Components/PasswordInput';
 import { yupPassword, yupPasswordConfirm } from '@Utils/yupValidations';
 import Copyright from '@Components/Copyright';
@@ -8,9 +8,13 @@ import RtlProvider from '@Utils/RtlProvider';
 import { useAuth } from '@ApiService/Requests/useAuth';
 import { IUpdateMyPasswordRequest } from '@ApiService/Interfaces/IUser';
 import { object } from 'yup';
+import { useUser } from '@ApiService/Requests/useUser';
 
 const UpdatePassword = () => {
   const { updateMyPassword } = useAuth();
+  const { user } = useUser();
+
+  if (!user) return <></>;
 
   const initialValues = {
     currentPassword: '',
@@ -24,8 +28,11 @@ const UpdatePassword = () => {
     passwordConfirm: yupPasswordConfirm,
   });
 
-  const onSubmit = (values: IUpdateMyPasswordRequest) => {
-    updateMyPassword({ ...values });
+  const onSubmit = (
+    values: IUpdateMyPasswordRequest,
+    formikHelpers: FormikHelpers<IUpdateMyPasswordRequest>
+  ) => {
+    updateMyPassword({ ...values }, {}, formikHelpers.resetForm);
   };
 
   return (
@@ -50,6 +57,7 @@ const UpdatePassword = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            enableReinitialize
           >
             {(formik) => (
               <Form noValidate>

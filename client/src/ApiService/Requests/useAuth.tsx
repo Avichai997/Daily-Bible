@@ -21,6 +21,7 @@ import {
   ISendConfirmEmailRequest,
 } from '@ApiService/Interfaces/IUser';
 import { ToastInfo, ToastSuccess } from '@Components/Toastify/Toasts';
+import { FormikHelpers } from 'formik';
 
 export const useGetAllUsers = (options?: QueryOptions<IUser[]>) => {
   const { data: Users, ...queryInfo } = useQuery<IUser[]>({
@@ -229,7 +230,8 @@ export const useAuth = () => {
       IUpdateMyPasswordResponse,
       unknown,
       IMutation<IUpdateMyPasswordRequest>
-    >
+    >,
+    resetForm?: FormikHelpers<typeof data>['resetForm']
   ) => {
     UpdateMyPassword(
       {
@@ -241,6 +243,7 @@ export const useAuth = () => {
         onSuccess: (res) => {
           ToastSuccess('!הסיסמה שלך עודכנה בהצלחה');
           updateLocaleStorage(res);
+          if (resetForm) resetForm();
         },
         ...options,
       }

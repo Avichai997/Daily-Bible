@@ -6,21 +6,20 @@ import { useUser } from '@ApiService/Requests/useUser';
 import {
   ProjectStatusPage,
   HomePage,
-  NoMatchPage,
+  NoMatch404Page,
   LoginPage,
   SignUpPage,
   ProfilePage,
   UpdatePasswordPage,
   ErrorFallback,
 } from '@Utils/LazySuspense';
-import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import Bible from '@Pages/Bible/Bible';
 
 const App = () => {
-  const { reset } = useQueryErrorResetBoundary();
   useUser();
 
   return (
-    <ErrorBoundary onReset={reset} fallbackRender={} FallbackComponent={ErrorFallback}>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Routes>
         <Route path='/Login' element={<LoginPage />} />
         <Route path='/SignUp' element={<SignUpPage />} />
@@ -32,13 +31,13 @@ const App = () => {
             </ProtectRoute>
           }
         >
-          <Route index element={<div>HOME PAGE BITCH</div>} />
+          <Route index element={<Bible />} />
           <Route path='/Profile' element={<ProfilePage />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
         </Route>
 
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
-        <Route path='*' element={<NoMatchPage />} />
+        <Route path='*' element={<NoMatch404Page />} />
       </Routes>
     </ErrorBoundary>
   );

@@ -23,7 +23,7 @@
     "client/src/Utils/AgGridEnterprise/local.he.tsx",
     "client/src/Assets",
     "client/build*",
-    "server/Seed/Postman Backup",
+    "server/Seed/Postman Backup/*",
     "server/build"
   ],
   "words": [

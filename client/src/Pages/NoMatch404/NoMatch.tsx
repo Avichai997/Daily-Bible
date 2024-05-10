@@ -107,7 +107,9 @@ const NoMatchPage = () => {
           <br />
           הדף שחיפשת לא קיים
         </div>
-        <button className='error__button error__button--active'>התחבר</button>
+        <button onClick={() => navigate('/Login')} className='error__button error__button--active'>
+          התחבר
+        </button>
         <button onClick={() => navigate(-1)} className='error__button'>
           חזור
         </button>

@@ -8,6 +8,7 @@ const ToastsContainer = () => {
       toastStyle={{
         textAlign: 'right',
         direction: 'rtl',
+        userSelect: 'none',
       }}
     />,
     document.getElementById('toastPortal') as HTMLElement

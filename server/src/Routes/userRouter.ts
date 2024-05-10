@@ -27,14 +27,14 @@ const router = express.Router();
 router
   .post('/signup', signup)
   .post('/login', login)
+  .get('/logout', logout)
   // .post('/forgotPassword', forgotPassword)
   .patch('/resetPassword/:token', resetPassword)
   // .post('/sendConfirmEmail', sendConfirmEmail)
-  
+
   .use(protect)
   // Protect all this routes after this middleware. this routes is only for signed-in users.
   // .post('/confirmEmail', confirmEmail)
-  .get('/logout', logout)
   .get('/me', getMe, getUser)
   .patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe)
   .patch('/updateMyPassword', updatePassword)
