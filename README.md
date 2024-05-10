@@ -71,10 +71,10 @@ To run the app client + server side in development MODE you have two methods ava
 
 - Open Postman
 - Click on "Create Workspace", hit "Next", enter name of workspace: "Daily Bible", Click on "Create".
-- Type CTRL + O to open import popup, click on "folders" and import the 2 folders located inside "YOUR_PROJECT_LOCATION\Daily-Bible\server\src\Seed\Postman Backup".
+- Type CTRL + O to open import popup, click on "folders" and import the 2 folders located inside "YOUR_PROJECT_LOCATION\Daily-Bible\server\src\Seed\PostmanBackup".
 - wait for the files to load and click on "Import" button.
 - In Postman click on "Collections" button in the left bar.
-- At the top right corner of the screen under  the "Upgrade" button click on "No Environment" select box and choose "Dev: Daily Bible".
+- At the top right corner of the screen under the "Upgrade" button click on "No Environment" select box and choose "Dev: Daily Bible".
 
 ## Tests:
 

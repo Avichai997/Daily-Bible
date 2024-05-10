@@ -8,7 +8,7 @@ package-lock.json
  .eslintcache
 
 # server ignores:
-server/Seed/Postman Backup
+server/src/Seed/PostmanBackup
 
 # client ignores:
 client/.vite

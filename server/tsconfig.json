@@ -30,5 +30,5 @@
     "skipLibCheck": true
   },
   "include": [".", ".eslintrc.cjs"],
-  "exclude": ["node_modules", "build*/", "dist*/", "Seed/Postman Backup"]
+  "exclude": ["node_modules", "build*/", "dist*/", "Seed/PostmanBackup"]
 }

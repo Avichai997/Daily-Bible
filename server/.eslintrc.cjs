@@ -20,7 +20,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  ignorePatterns: ['build', '.eslintrc.cjs', 'Seed/Postman Backup'],
+  ignorePatterns: ['build', '.eslintrc.cjs', 'src/Seed/PostmanBackup'],
   plugins: ['@typescript-eslint', 'promise', 'import', 'prettier'],
   rules: {
     radix: 'off',
