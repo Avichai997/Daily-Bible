@@ -9,6 +9,18 @@ export const axiosClient = axios.create({
   withCredentials: true,
 });
 
+// axiosInterceptor.defaults.headers.common['Content-Type'] = 'application/json';
+// axiosClient.defaults.headers.Authorization = `Bearer ${user.token}`;
+
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    return Promise.reject(error);
+  }
+);
+
 const defaultQueryFn: QueryFunction<unknown, QueryKey> = async ({ queryKey: path }) => {
   const { data } = await axiosClient.get<unknown>(`${path}`);
 
@@ -55,8 +67,9 @@ export const createQueryClient = (options?: QueryClientConfig) => {
   return new QueryClient({
     defaultOptions: {
       queries: {
+        useErrorBoundary: true,
         queryFn: defaultQueryFn,
-        onError: queryErrorHandler,
+        // onError: queryErrorHandler,
         refetchOnReconnect: false, // on reconnect internet, default is True
         refetchOnWindowFocus: false,
         // refetchOnMount: false, // If set to true, the query will refetch on mount if the data is stale.
@@ -70,6 +83,7 @@ export const createQueryClient = (options?: QueryClientConfig) => {
         onError: queryErrorHandler,
       },
     },
+
     ...options,
   });
 };

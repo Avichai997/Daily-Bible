@@ -21,13 +21,7 @@ module.exports = {
     'plugin:@cspell/recommended',
   ],
   plugins: ['react', 'react-hooks', '@typescript-eslint', '@tanstack/query', 'prettier'],
-  ignorePatterns: [
-    'build*',
-    'src/Utils/AgGridEnterprise/ag-grid-enterprise.auto.esm.js',
-    'src/Utils/AgGridEnterprise/ag-grid-community.auto.esm.js',
-    'src/Utils/AgGridEnterprise/licenseManager.js',
-    'src/Assets',
-  ],
+  ignorePatterns: ['build*', 'src/Assets'],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -75,7 +69,10 @@ module.exports = {
     'jsx-a11y/rule-name': 'off',
     'jsx-a11y/alt-text': 'off',
     '@typescript-eslint/dot-notation': 'off',
-    '@cspell/spellchecker': ['error', { checkComments: true, autoFix: true }],
+    '@cspell/spellchecker': [
+      'error',
+      { checkComments: true, autoFix: true, cspell: { import: ['../cspell.json'] } },
+    ],
     '@typescript-eslint/no-unused-vars': 'error',
     'import/no-extraneous-dependencies': [
       'error',

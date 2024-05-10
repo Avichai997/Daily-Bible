@@ -38,7 +38,6 @@ export const getOne = <T>(Model: Model<T>, populateOptions?: IPopulateOptions) =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let query: Query<any, T> = Model.findById(req.params.id);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     if (populateOptions) query = query.populate(populateOptions);
 
     const doc = await query;

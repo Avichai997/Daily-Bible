@@ -1,0 +1,26 @@
+name: Push After PR Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  push-to-repo:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Git config
+        run: |
+          git config --global user.email "avichai997@gmail.com"
+          git config --global user.name "avichai997"
+
+      - name: Push to Another Repository
+        run: |
+          git remote add repo2 https://${{ secrets.GIT_ACCESS_TOKEN }}:x-oauth-basic@github.com/Avichai997/DailyBible-Fullstack-course.git
+          git push repo2 HEAD:main

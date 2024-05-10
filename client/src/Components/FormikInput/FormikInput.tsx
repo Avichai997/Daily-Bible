@@ -13,6 +13,7 @@ export interface IFormikInput {
   type: string;
   autoComplete: string;
   style?: SxProps;
+  disabled?: boolean;
 }
 
 const FormikInput = ({
@@ -26,6 +27,7 @@ const FormikInput = ({
   type,
   autoComplete,
   style,
+  disabled = false,
 }: IFormikInput) => {
   return (
     <Field
@@ -43,6 +45,7 @@ const FormikInput = ({
       autoComplete={autoComplete}
       autoFocus={autoFocus}
       style={style}
+      disabled={!!disabled}
     />
   );
 };

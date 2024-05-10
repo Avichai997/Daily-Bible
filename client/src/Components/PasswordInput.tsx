@@ -49,7 +49,7 @@ export const PasswordInput = ({
           <InputAdornment position='end' style={{ position: 'absolute', right: 0 }}>
             <IconButton
               aria-label='toggle password visibility'
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setShowPassword((prev) => !prev)}
               edge='end'
             >
               {formik.values[name] && (showPassword ? <VisibilityOff /> : <Visibility />)}

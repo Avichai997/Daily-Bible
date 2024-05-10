@@ -9,6 +9,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+    "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
@@ -40,6 +41,5 @@
       "@Common/CommonInterfaces": ["noSuchDirectory"]
     }
   },
-  "include": ["vite.config.ts", "vitest.config.ts", ".eslintrc.cjs", "src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["vite.config.ts", "vitest.config.ts", ".eslintrc.cjs", "src", "package.json"]
 }

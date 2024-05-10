@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Preview } from '@/types/Profile.model';
 
-const UploadImage: React.FC<{ file: File | string }> = ({ file }) => {
+type Preview = string | ArrayBuffer | null;
+interface IUploadImage {
+  file: File | string;
+}
+
+const UploadImage = ({ file }: IUploadImage) => {
   const [preview, setPreview] = useState<Preview>(null);
 
   useEffect(() => {
@@ -15,15 +19,13 @@ const UploadImage: React.FC<{ file: File | string }> = ({ file }) => {
     if (file instanceof File) {
       const render = new FileReader();
       render.readAsDataURL(file as File);
-      render.onload = () => {
-        setPreview((prev) => render.result);
-      };
+      render.onload = () => setPreview(render.result);
     }
   }, [file, preview, setPreview]);
 
   // Checking if a user has uploaded an image to change or display the image from Mongo
   const existImage = () => {
-    if (!preview && typeof file !== 'string') return;
+    if (!preview && typeof file !== 'string') return undefined;
 
     return preview
       ? (preview as string)

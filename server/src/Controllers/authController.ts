@@ -95,7 +95,7 @@ export const signup = catchAsync(async (req, res) => {
 //   });
 
 //   // 4) Log the user in, send welcome email & send JWT
-//   const urlSuccess = `${CLIENT_URL}/Admin/user/Profile`;
+//   const urlSuccess = `${CLIENT_URL}/Admin/Profile`;
 //   await new Email(user, urlSuccess).sendWelcome();
 
 //   return createSendToken(user, StatusCodes.OK, req, res);
@@ -150,7 +150,6 @@ export const login = catchAsync(async (req, res, next) => {
 
 export const logout: RequestHandler = (_req, res) => {
   res.cookie('token', 'loggedout', {
-    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
   res.status(StatusCodes.OK).json({ status: 'success', token: '' });

@@ -1,8 +1,7 @@
 import { Box, Button, Container, Typography } from '@mui/material';
-import { Formik, Form, ErrorMessage, FormikHelpers } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import RtlProvider from '@Utils/RtlProvider';
 import Copyright from '@Components/Copyright';
-import ImgProfile from '@pages/Profile/ImgProfile';
 import FormikInput from '@Components/FormikInput/FormikInput';
 import * as Yup from 'yup';
 import { useAuth } from '@ApiService/Requests/useAuth';
@@ -15,8 +14,9 @@ import {
   yupPhotoUpload,
 } from '@Utils/yupValidations';
 import { updatedDiff } from 'deep-object-diff';
-import { UpdateProfile } from '@/types/Profile.model';
-import parseGenericObject from '@/utils/parseGenericObject';
+import parseGenericObject from '@Utils/parseGenericObject';
+import ImgProfile, { IUpdateProfile } from './ImgProfile';
+import classes from './Profile.module.scss';
 
 const Profile = () => {
   const { user } = useUser();
@@ -25,7 +25,7 @@ const Profile = () => {
   if (!user) return <></>;
 
   const { firstName, lastName, email, phoneNumber, photo } = user;
-  const initialValues: UpdateProfile = {
+  const initialValues: IUpdateProfile = {
     firstName,
     lastName,
     email,
@@ -41,31 +41,24 @@ const Profile = () => {
     photo: yupPhotoUpload,
   });
 
-  const onSubmit = (values: UpdateProfile, actions: FormikHelpers<UpdateProfile>) => {
-    // we want to update only the values that has changed
-    const updatedValues = updatedDiff(initialValues, values);
-
+  const onSubmit = (values: IUpdateProfile) => {
+    // We want to update only the values that has changed.
+    const updatedValues = updatedDiff(initialValues, values) as Partial<IUpdateProfile>;
     const formData = parseGenericObject(updatedValues);
 
+    // @ts-ignore
     updateMyProfile(formData);
   };
 
   return (
     <Container component='main' maxWidth='xs'>
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <Box className={classes.box}>
         <Typography component='h1' variant='h5'>
           עדכון פרופיל
         </Typography>
         <Formik
           initialValues={initialValues}
-          enableReinitialize // Control whether Formik should reset the form if initialValues changes (using deep equality).
+          enableReinitialize // Control whether Formik should reset the form if initialValues changes (using deep object equality).
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
@@ -73,7 +66,7 @@ const Profile = () => {
             const isDisabled = !formik.isValid || !formik.values.photo || !formik.dirty;
 
             return (
-              <Form noValidate>
+              <Form noValidate className={classes.profileForm}>
                 <RtlProvider>
                   <ImgProfile
                     setFieldValue={formik.setFieldValue}
@@ -103,6 +96,7 @@ const Profile = () => {
                   <FormikInput
                     formik={formik}
                     name='phoneNumber'
+                    // eslint-disable-next-line quotes
                     label={"מס' טלפון"}
                     placeholder='050-0000000'
                     type='tel'

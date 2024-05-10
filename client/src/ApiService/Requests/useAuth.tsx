@@ -21,6 +21,7 @@ import {
   ISendConfirmEmailRequest,
 } from '@ApiService/Interfaces/IUser';
 import { ToastInfo, ToastSuccess } from '@Components/Toastify/Toasts';
+import { FormikHelpers } from 'formik';
 
 export const useGetAllUsers = (options?: QueryOptions<IUser[]>) => {
   const { data: Users, ...queryInfo } = useQuery<IUser[]>({
@@ -61,11 +62,11 @@ export const useAuth = () => {
       role: userResponse.data.role,
     };
 
-    localStorage.setItem('user', JSON.stringify(userDetails));
-    queryClient.setQueryData(['user'], userDetails);
+    localStorage.setItem(USER_QUERY_KEY, JSON.stringify(userDetails));
+    queryClient.setQueryData([USER_QUERY_KEY], userDetails);
   };
 
-  const getUser = () => queryClient.getQueryData(['user']);
+  const getUser = () => queryClient.getQueryData([USER_QUERY_KEY]);
 
   const { mutate: SignupUser, ...signupUserMutateInfo } = useMutation<
     ILoginSignupResponse,
@@ -134,6 +135,7 @@ export const useAuth = () => {
       {
         onSuccess: (res) => {
           ToastSuccess('ההרשמה בוצעה בהצלחה!');
+          ToastSuccess(`שלום ${res.data.name}`);
           updateLocaleStorage(res);
           navigate(location?.state?.path || '/', { replace: true });
         },
@@ -156,7 +158,11 @@ export const useAuth = () => {
         onSuccess: (res) => {
           ToastSuccess(`שלום ${res.data.name}`);
           updateLocaleStorage(res);
-          navigate(location?.state?.path || '/', { replace: true });
+          navigate(
+            // location?.state?.path ||
+            '/',
+            { replace: true }
+          );
         },
         ...options,
       }
@@ -170,7 +176,7 @@ export const useAuth = () => {
     LogoutUser(
       {
         method: 'Get',
-        path: USER_QUERY_KEY,
+        path: `${USER_QUERY_KEY}/logout`,
         data: null,
       },
       {
@@ -210,7 +216,7 @@ export const useAuth = () => {
       {
         onSuccess: (res) => {
           ToastSuccess('!עדכון נתונים בוצע בהצלחה');
-          const { tokenExpiration } = queryClient.getQueryData(['user']) as IUserLocalStorage;
+          const { tokenExpiration } = queryClient.getQueryData(['users']) as IUserLocalStorage;
           updateLocaleStorage({ ...res, tokenExpiration });
         },
         ...options,
@@ -224,7 +230,8 @@ export const useAuth = () => {
       IUpdateMyPasswordResponse,
       unknown,
       IMutation<IUpdateMyPasswordRequest>
-    >
+    >,
+    resetForm?: FormikHelpers<typeof data>['resetForm']
   ) => {
     UpdateMyPassword(
       {
@@ -236,6 +243,7 @@ export const useAuth = () => {
         onSuccess: (res) => {
           ToastSuccess('!הסיסמה שלך עודכנה בהצלחה');
           updateLocaleStorage(res);
+          if (resetForm) resetForm();
         },
         ...options,
       }

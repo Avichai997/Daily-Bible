@@ -5,19 +5,19 @@
     "rootDir": ".",
     "sourceMap": true,
     "moduleResolution": "Node",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"],
-      "@public/*": ["public/*"],
-      "@Services/*": ["src/Services/*"],
-      "@Controllers/*": ["src/Controllers/*"],
-      "@Middlewares/*": ["src/Middlewares/*"],
-      "@Models/*": ["src/Models/*"],
-      "@Routes/*": ["src/Routes/*"],
-      "@Interfaces/*": ["src/Interfaces/*"],
-      "@Utils/*": ["src/Utils/*"],
-      "@Views/*": ["src/Views/*"],
-      "@Seed/*": ["src/Seed/*"]
+      // "@/*": ["./*"],
+      "@public/*": ["./public/*"],
+      "@Services/*": ["./Services/*"],
+      "@Controllers/*": ["./Controllers/*"],
+      "@Middlewares/*": ["./Middlewares/*"],
+      "@Models/*": ["./Models/*"],
+      "@Routes/*": ["./Routes/*"],
+      "@Interfaces/*": ["./Interfaces/*"],
+      "@Utils/*": ["./Utils/*"],
+      "@Views/*": ["./Views/*"],
+      "@Seed/*": ["./Seed/*"]
     },
     "allowJs": true,
     "checkJs": true,
@@ -29,6 +29,6 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["src", ".eslintrc.cjs"],
-  "exclude": ["node_modules", "build*/", "dist*/", "Seed/Postman Backup"]
+  "include": [".", ".eslintrc.cjs"],
+  "exclude": ["node_modules", "build*/", "dist*/", "Seed/PostmanBackup"]
 }

@@ -5,14 +5,15 @@ import { useUser } from '@ApiService/Requests/useUser';
 // Pages
 import {
   ProjectStatusPage,
-  AdminPage,
-  NoMatchPage,
+  HomePage,
+  NoMatch404Page,
   LoginPage,
   SignUpPage,
   ProfilePage,
   UpdatePasswordPage,
   ErrorFallback,
 } from '@Utils/LazySuspense';
+import Bible from '@Pages/Bible/Bible';
 
 const App = () => {
   useUser();
@@ -26,16 +27,17 @@ const App = () => {
           path='/'
           element={
             <ProtectRoute>
-              <AdminPage />
+              <HomePage />
             </ProtectRoute>
           }
         >
-          <Route path='user/Profile' element={<ProfilePage />} />
-          <Route path='user/UpdatePassword' element={<UpdatePasswordPage />} />
+          <Route index element={<Bible />} />
+          <Route path='/Profile' element={<ProfilePage />} />
+          <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
         </Route>
 
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
-        <Route path='*' element={<NoMatchPage />} />
+        <Route path='*' element={<NoMatch404Page />} />
       </Routes>
     </ErrorBoundary>
   );

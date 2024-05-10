@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request } from 'express';
-import { Model, Query, UnpackedIntersection } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import { IPopulateOptions } from '@Interfaces/common';
 import AppError from '@Utils/AppError';
 import APIFeatures from '@Utils/ApiFeatures';
@@ -37,8 +37,7 @@ export const getOne = async <T>(
 ) => {
   let query: Query<any, T> = Model.findById(req.params.id);
   if (populateOptions)
-    (query as Query<unknown, T, object, UnpackedIntersection<T, unknown>, 'find'>) =
-      query.populate(populateOptions);
+    (query as Query<T[], T, object, T, 'find'>) = query.populate(populateOptions);
 
   const doc: T = await query;
   if (!doc) throw new AppError('Record not found', StatusCodes.NOT_FOUND);

@@ -1,0 +1,243 @@
+{
+  "info": {
+    "_postman_id": "0b33c80c-4d09-426e-9c88-cca921bd5b31",
+    "name": "Users",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24146886"
+  },
+  "item": [
+    {
+      "name": "GET all users",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/users",
+          "host": ["{{URL}}"],
+          "path": ["users"],
+          "query": [
+            {
+              "key": "photo",
+              "value": "user-6368f766ea8e37ce25e72475-1668326113713",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/users/6387156e7ac3621b2c108b39",
+          "host": ["{{URL}}"],
+          "path": ["users", "6387156e7ac3621b2c108b39"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "My profile",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \r\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/users/me",
+          "host": ["{{URL}}"],
+          "path": ["users", "me"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Current User Data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "firstName",
+              "value": "אביחי",
+              "type": "text"
+            },
+            {
+              "key": "lastName",
+              "value": "אילוז",
+              "type": "text",
+              "disabled": true
+            },
+            {
+              "key": "email",
+              "value": "avichai997@gmail.com",
+              "type": "text",
+              "disabled": true
+            },
+            {
+              "key": "photo",
+              "type": "file",
+              "src": "/C:/Users/Avichai Iluz/Downloads/Shual Dashboards System/server/public/img/users/user-63bc1d7337538b0773d1fb65-1673517624582.jpeg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{URL}}/users/updateMe",
+          "host": ["{{URL}}"],
+          "path": ["users", "updateMe"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Current User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/users/deleteMe",
+          "host": ["{{URL}}"],
+          "path": ["users", "deleteMe"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{URL}}/users/62b02a801295212cacb65900",
+          "host": ["{{URL}}"],
+          "path": ["users", "62b02a801295212cacb65900"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get my profile picture",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/img/users/default.jpg",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["img", "users", "default.jpg"],
+          "query": [
+            {
+              "key": "photo",
+              "value": "user-6368f766ea8e37ce25e72475-1667978994699.jpeg",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Pre POST requests to add a CSRF header from the CsrfToken variable script that is stored as an environment variable.",
+          "eval(pm.variables.get(\"prePostRequestAddCsrfHeader\"));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "//Evaluate the visualizer script that is stored as an environment variable.",
+          "eval(pm.variables.get(\"dataTableVisualizerScript\"));"
+        ]
+      }
+    }
+  ]
+}

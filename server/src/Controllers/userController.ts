@@ -37,7 +37,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
     );
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filterObj(
+  const filteredBody: Partial<IUsers> = filterObj(
     req.body,
     'firstName',
     'lastName',
@@ -48,7 +48,10 @@ export const updateMe = catchAsync(async (req, res, next) => {
 
   const oldPhoto = req.user.photo;
 
-  if (req.body.photo && oldPhoto !== req.body.photo) removeImage(oldPhoto, 'users');
+  if (req.file && oldPhoto !== req.file.filename) {
+    removeImage(oldPhoto, 'users');
+    filteredBody.photo = req.file.filename;
+  }
 
   // 3) Update user document
 
