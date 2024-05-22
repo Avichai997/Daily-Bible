@@ -27,10 +27,10 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.GIT_ACCESS_TOKEN }}
         with:
           source-directory: .
-          destination-github-username: 'Avichai997'
+          destination-repository-username: 'Avichai997'
           destination-repository-name: 'DailyBible-Fullstack-course'
           user-email: avichai997@gmail.com
-          destination-repository-username: ${{ env.RANDOM_USERNAME }}
+          destination-github-username: ${{ env.RANDOM_USERNAME }}
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-branch: main
       - name: Test get variable exported by push-to-another-repository
