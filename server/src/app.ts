@@ -19,13 +19,12 @@ import {
   loginLimiterMiddleware,
 } from '@Middlewares/security';
 import { StatusCodes } from 'http-status-codes';
-import { version } from '../package.json';
 
 const app = express();
 
 // app.options('*', cors());
 app.use(express.json({ limit: '100kb' }));
-app.use(express.urlencoded({ extended: true, limit: '4000kb' }));
+app.use(express.urlencoded({ extended: true, limit: '5000kb' }));
 app.use(cookieParser());
 
 app.use(express.static('./public'));
@@ -44,9 +43,7 @@ app.use(hppMiddleware);
 // 2) ROUTES
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
-app.get('/api/health', (_req, res) =>
-  res.status(StatusCodes.OK).json(`Server is healthy and running v${version}`)
-);
+app.get('/api/health', (_req, res) => res.status(StatusCodes.OK).json(`Server is healthy`));
 
 app.all('*', (req, _res, next) =>
   next(new AppError(`הכתובת ${req.originalUrl} לא קיימת בשרת!`, StatusCodes.NOT_FOUND))

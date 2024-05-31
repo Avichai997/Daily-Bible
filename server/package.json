@@ -2,11 +2,14 @@
   "name": "daily-bible-server",
   "version": "1.0.0",
   "main": "server.ts",
+  "type": "commonjs",
   "scripts": {
     "start:dev": "env-cmd -f .env.dev ts-node-dev --watch .env.dev --require tsconfig-paths/register --transpile-only --respawn --inspect=4321 src/server.ts",
     "seed:dev": "env-cmd -f .env.dev ts-node-dev --require tsconfig-paths/register --transpile-only src/Seed/MockData/importDataToDB.ts",
-    "build:js": "rimraf build && tsc --noEmit false && tsc-alias && xcopy .env.dev build &&",
-    "lint": "npx tsc && npx prettier --write --cache --log-level error . && npx cspell --cache --no-progress ./**/* && npx eslint --fix .",
+    "build:dev": "rimraf build && tsc && tsc-alias && cpx .env.dev build/.env && cpx package.json build",
+    "build:prod": "rimraf build && tsc && tsc-alias && cpx .env.prod build/.env && cpx package.json build",
+    "serve": "node build/server.js",
+    "lint": "npx tsc --noEmit && npx prettier --write --cache --log-level error . && npx cspell --cache --no-progress ./**/* && npx eslint --fix .",
     "merge": "git pull origin main && git merge main"
   },
   "dependencies": {
@@ -57,6 +60,7 @@
     "@types/validator": "^13.11.9",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
+    "cpx": "^1.5.0",
     "cspell": "^8.8.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
