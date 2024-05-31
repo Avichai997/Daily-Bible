@@ -8,7 +8,7 @@
     "seed:dev": "env-cmd -f .env.dev ts-node-dev --require tsconfig-paths/register --transpile-only src/Seed/MockData/importDataToDB.ts",
     "build:dev": "rimraf build && tsc && tsc-alias && cpx .env.dev build/.env && cpx package.json build",
     "build:prod": "rimraf build && tsc && tsc-alias && cpx .env.prod build/.env && cpx package.json build",
-    "serve": "node server.js",
+    "serve": "node build/server.js",
     "lint": "npx tsc --noEmit && npx prettier --write --cache --log-level error . && npx cspell --cache --no-progress ./**/* && npx eslint --fix .",
     "merge": "git pull origin main && git merge main"
   },
