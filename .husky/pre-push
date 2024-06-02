@@ -1,1 +1,1 @@
-// cd server && npm run lint && cd .. && cd client && npm run lint
+# cd server && npm run lint && cd .. && cd client && npm run lint
