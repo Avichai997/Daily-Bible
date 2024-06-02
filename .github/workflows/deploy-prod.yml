@@ -1,4 +1,4 @@
-name: Deploy to EC2 PROD
+name: Deploy to EC2
 
 on:
   push:
@@ -28,5 +28,5 @@ jobs:
             npm set legacy-peer-deps true
             npm install
             npm run build:prod
-            pm2 startOrRestart ecosystem.config.js --only server
+            pm2 startOrRestart ecosystem.config.js --only server || pm2 start ecosystem.config.js --only server
           EOF
