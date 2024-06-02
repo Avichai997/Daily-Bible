@@ -24,7 +24,9 @@ jobs:
           SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/bibleKey.pem ubuntu@ec2-13-50-7-79.eu-north-1.compute.amazonaws.com << 'EOF'
-            cd Daily-Bible/server
+            cd Daily-Bible
+            git pull origin/main
+            cd server
             npm set legacy-peer-deps true
             npm install
             npm run build:prod
