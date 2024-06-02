@@ -26,5 +26,5 @@ jobs:
         working-directory: ./server
 
       - name: Build production
-        run: npm run build:prod
+        run: npx tsc
         working-directory: ./server

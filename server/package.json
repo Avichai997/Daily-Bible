@@ -7,7 +7,7 @@
     "start:dev": "env-cmd -f .env.dev ts-node-dev --watch .env.dev --require tsconfig-paths/register --transpile-only --respawn --inspect=4321 src/server.ts",
     "seed:dev": "env-cmd -f .env.dev ts-node-dev --require tsconfig-paths/register --transpile-only src/Seed/MockData/importDataToDB.ts",
     "build:dev": "rimraf build && tsc && tsc-alias && cpx .env.dev build/.env && cpx package.json build",
-    "build:prod": "tsc && tsc-alias && [ -f .env.prod ] && cpy .env.prod build || true && cpy package.json build && cpy public build",
+    "build:prod": "tsc && tsc-alias && cpy .env.prod build && cpy package.json build && cpy public build",
     "serve": "env-cmd -f .env.prod node build/server.js",
     "lint": "npx tsc --noEmit && npx prettier --write --cache --log-level error . && npx cspell --cache --no-progress ./**/* && npx eslint --fix .",
     "merge": "git pull origin main && git merge main"
