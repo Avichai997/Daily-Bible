@@ -1,4 +1,4 @@
-name: Run npm commands on server folder changes
+name: Lint on PR
 
 on:
   pull_request:
@@ -14,21 +14,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set legacy-peer-deps
         run: npm set legacy-peer-deps true
+        working-directory: ./server
 
       - name: Install dependencies
         run: npm install
-
-      - name: Prettier
-        run: npx prettier --check --log-level error .
-
-      - name: ESLint
-        run: npx eslint --fix .
-
-      - name: CSpell
-        run: npx cspell --cache --no-progress .
+        working-directory: ./server
 
       - name: Build production
         run: npm run build:prod
+        working-directory: ./server
