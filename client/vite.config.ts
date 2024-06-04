@@ -3,19 +3,19 @@ import { join } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
-const { HOST: host = 'localhost', CLIENT_PORT = 3000 } = process.env;
+const { CLIENT_URL, CLIENT_PORT = 3000 } = process.env;
 const openUrl = (port = CLIENT_PORT) => `http://localhost:${port}`;
 
 export default defineConfig({
   server: {
-    host,
+    host: 'localhost',
     port: +CLIENT_PORT,
     open: openUrl(),
   },
   preview: {
-    host,
-    port: +CLIENT_PORT + 1,
-    open: host === 'localhost' ? openUrl(+CLIENT_PORT + 1) : false,
+    host: CLIENT_URL,
+    port: +CLIENT_PORT,
+    open: false,
   },
   build: {
     sourcemap: true,
