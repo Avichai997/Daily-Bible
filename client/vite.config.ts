@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
       open: false,
     },
     build: {
-      sourcemap: true,
+      sourcemap: false,
       minify: true,
       outDir: 'build',
       chunkSizeWarningLimit: 160000000000000,
