@@ -32,3 +32,5 @@ jobs:
             npm run build:prod
             pm2 startOrRestart ecosystem.config.js --only server || pm2 start ecosystem.config.js --only server
           EOF
+
+          
