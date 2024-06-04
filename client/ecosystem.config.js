@@ -1,9 +1,9 @@
 module.exports = {
   apps: [
     {
-      name: 'server',
+      name: 'client',
       script: 'npm',
-      args: 'run serve',
+      args: 'run preview:prod',
       exec_mode: 'fork',
     },
   ],

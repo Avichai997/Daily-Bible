@@ -41,5 +41,12 @@
       "@Common/CommonInterfaces": ["noSuchDirectory"]
     }
   },
-  "include": ["vite.config.ts", "vitest.config.ts", ".eslintrc.cjs", "src", "package.json"]
+  "include": [
+    "vite.config.ts",
+    "vitest.config.ts",
+    ".eslintrc.cjs",
+    "src",
+    "package.json",
+    "ecosystem.config.js"
+  ]
 }
