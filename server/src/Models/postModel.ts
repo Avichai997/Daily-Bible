@@ -1,14 +1,29 @@
+/* eslint-disable func-names */
 import { Schema, model } from 'mongoose';
-import IPost from '@Interfaces/IPost';
+// import AppError from '@Utils/AppError';
+import { /* currentPost, */ IPosts } from '@Interfaces/IPosts';
+// import { TEN_MINUTES } from '@Utils/commonConstants';
+// import { StatusCodes } from 'http-status-codes';
 
-const postSchema = new Schema<IPost>(
+const postSchema = new Schema<IPosts>(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, 'חובה להזין שם קטגוריה'],
-      trim: true,
-      maxlength: [40, 'שם לקוח צריך להיות קצר מ-40 תווים'],
-      minlength: [2, 'שם לקוח צריך להיות ארוך מ-2 תווים'],
+      required: [true, 'חובה להזין כותרת לפוסט'],
+      minlength: 2,
+      maxlength: 40,
+    },
+    photo: { type: String, default: 'default.jpg' },
+    authorId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'חובה להזין מחבר לפוסט'],
+    },
+    postChangedAt: Date, // changed or created
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
     },
   },
   {
@@ -18,6 +33,16 @@ const postSchema = new Schema<IPost>(
   }
 );
 
-const Post = model<IPost>('Post', postSchema);
+postSchema.virtual<IPosts>('posts', {
+  //
+  //
+  //
+  //
+});
+//
+//
+//
+//
+const Post = model<IPosts>('Post', postSchema);
 
 export default Post;
