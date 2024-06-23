@@ -12,6 +12,7 @@ import {
   ProfilePage,
   UpdatePasswordPage,
   ErrorFallback,
+  WhyDailyBible,
 } from '@Utils/LazySuspense';
 import Bible from '@Pages/Bible/Bible';
 
@@ -33,6 +34,7 @@ const App = () => {
         >
           <Route index element={<Bible />} />
           <Route path='/Profile' element={<ProfilePage />} />
+          <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
         </Route>
 

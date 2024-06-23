@@ -1,0 +1,35 @@
+@import '../../index.scss';
+
+.why {
+    &-header {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    &-details {
+        margin-bottom: 1rem;
+        display: block;
+    }
+    &-bold {
+        font-weight: bold;
+    }
+    &-underline {
+        text-decoration: underline;
+    }
+    .left {
+        flex: 1
+
+    }
+    .right {
+         @include respond(tab-port) {
+            display: none;
+        }
+        width: 30%;
+        img {
+            object-fit: contain;
+            padding: 4px;
+            width: 100%;
+            height: auto;
+        }
+    }
+}
