@@ -4,10 +4,16 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: Sbl-Hbrw;
+  src: url(./Assets/Fonts/SBL_Hbrw.ttf) format('truetype');
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
-  font-family: Rubik;
+  font-family: Sbl-Hbrw;
   font-style: normal;
 }
 *,
