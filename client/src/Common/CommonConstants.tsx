@@ -2,6 +2,8 @@
 
 // React Query keys
 export const USER_QUERY_KEY = 'users';
+export const DAILY_LESSONS_KEY = 'dailyLessons';
+export const DAILY_LESSON_SOURCE_KEY = 'dailyLessons';
 
 // Error Boundary Fallback
 export const SHOW_ERROR_MSG = 'הצג שגיאה';
