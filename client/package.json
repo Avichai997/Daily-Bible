@@ -27,9 +27,10 @@
     "@tanstack/react-query": "^4.29.5",
     "@tanstack/react-query-devtools": "^4.29.6",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "dayjs": "^1.11.11",
     "deep-object-diff": "^1.1.9",
+    "dotenv": "^16.4.5",
     "formik": "^2.4.6",
     "framer-motion": "^11.1.9",
     "jotai": "^2.8.0",
@@ -42,6 +43,7 @@
     "stylis": "^4.3.2",
     "stylis-plugin-rtl": "^2.1.1",
     "sweetalert2": "^11.10.8",
+    "xlsx": "^0.18.5",
     "yup": "^1.4.0"
   },
   "devDependencies": {
