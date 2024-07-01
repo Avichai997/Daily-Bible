@@ -1,0 +1,30 @@
+name: Lint on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Set legacy-peer-deps
+        run: npm set legacy-peer-deps true
+        working-directory: ./server
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./server
+
+      - name: Build production
+        run: npx tsc
+        working-directory: ./server
