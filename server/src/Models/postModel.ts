@@ -12,6 +12,8 @@ const postSchema = new Schema<IPosts>(
       required: [true, 'חובה להזין כותרת לפוסט'],
       minlength: 2,
       maxlength: 40,
+
+      
     },
     photo: { type: String, default: 'default.jpg' },
     authorId: {
