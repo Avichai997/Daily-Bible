@@ -30,4 +30,4 @@ jsonData.forEach((row: any[]) => {
 });
 
 // Save the data to a JSON file
-fs.writeFileSync('output.json', JSON.stringify(formattedData, null, 2));
+fs.writeFileSync('./src/Components/Spotify/dailyStudy.json', JSON.stringify(formattedData, null, 2));

@@ -47,6 +47,7 @@
     ".eslintrc.cjs",
     "src",
     "package.json",
-    "ecosystem.config.cjs"
+    "ecosystem.config.cjs",
+    "src/**/*.json" ,
   ]
 }

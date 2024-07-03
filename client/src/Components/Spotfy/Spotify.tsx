@@ -1,41 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { getBookAndChapters } from './utils/searchDay';
+import { convertToEmbedUrl, getGematria } from './utils/searchDay';
+import BibleEpisodes from './BibleEpisodes.json';
+import { Box } from '@mui/material';
 
 interface SpotifyEmbedProps {
-  embedUrl: string;
+  book: string;
+  chapter: string;
 }
 
-const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ embedUrl }) => {
-  const [data, setData] = useState<{ book: any; chapters: any; }>();
-  
-  useEffect(() => {
-    fetch('/output.json')
-      .then((response) => response.json())
-      .then((data) => {
-        const result = getBookAndChapters(data, 'תשע"ח', 'סיון', 'ו');
-        console.log(result);
-        setData(result || undefined);
-      })
-      .catch((error) => {
-        console.error('Error loading JSON data:', error);
-      });
-  }, []);
+const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ book, chapter }) => {
+  const [url, setUrl] = useState('');
 
-  const getBookAndChapters = (data: any, year: string, month: string, day: string) => {
-    const entry = data.find((item: { year: string; month: string; day: string }) => item.year === year && item.month === month && item.day === day);
-    if (entry) {
-      return {
-        book: entry.book,
-        chapters: entry.chapters,
-      };
-    } else {
+  useEffect(() => {
+    if (book && chapter) {
+      findChapter(book, getGematria(chapter));
+    }
+  }, [book, chapter]);
+
+  const findChapter = (book: string, chapter: number) => {
+    const episodes = (BibleEpisodes as any)[book];
+    if (!episodes) {
       return null;
     }
+
+    const entry = episodes[chapter.toString()];
+    console.log(entry);
+    if (entry) {
+      setUrl(convertToEmbedUrl(entry.spotify));
+    }
   };
+
   return (
-    <div>
+    <Box display='flex' flexDirection='column'>
       <iframe
-        src={embedUrl}
+        src={url}
         width='500'
         height='200'
         frameBorder='0'
@@ -43,7 +41,7 @@ const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ embedUrl }) => {
         allow='encrypted-media'
         title='Spotify Player'
       ></iframe>
-    </div>
+    </Box>
   );
 };
 

@@ -47,6 +47,7 @@ export const useBibleDailyLessonSource = (tref?: string) => {
   });
 };
 export const useDailyLessonSource = (date = DEFAULT_DATE) => {
+  getChapterSefaria('Genesis', '1')
   const {
     data: dailyLessons,
     isLoading: isLoadingLessons,
@@ -69,3 +70,11 @@ export const useDailyLessonSource = (date = DEFAULT_DATE) => {
     data: dailyLessonSource,
   };
 };
+
+export const getChapterSefaria = async (book: string, chapter: string):Promise<string[][]> => {
+  const res = await fetch(`${SEFARIA_URL}/v3/texts/${book}_${chapter}?version=hebrew`).then(
+    (res) => res.json() as Promise<ILessonSource>
+  );
+  console.log(res)
+  return res?.versions?.[0]?.text;
+}
