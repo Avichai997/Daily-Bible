@@ -1,10 +1,4 @@
 import axios from 'axios';
-import * as dotenv from 'dotenv';
-
-// dotenv.config();
-
-// const clientId = process.env.SPOTIFY_CLIENT_ID!;
-// const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;
 
 async function getAccessToken(clientId: string, clientSecret: string): Promise<string> {
     const encodedCredentials = btoa(`${clientId}:${clientSecret}`);
@@ -46,7 +40,7 @@ export async function getEpisodeUrl(bookName: string, chapterName: string): Prom
     }
 }
 
-// דוגמה לשימוש
+// example usage:
 // const bookName = "שם הספר";
 // const chapterName = "שם הפרק";
 
