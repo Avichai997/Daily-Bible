@@ -6,8 +6,7 @@ import { useEffect, useState } from 'react';
 import { getBookAndChapters, getGematria } from '@Components/Spotfy/utils/searchDay';
 import { BibleBooks } from './Constants';
 import { chaptersType, studyDailyType } from './Bible.types';
-import { r } from 'msw/lib/glossary-de6278a9';
-import { c } from 'vite/dist/node/types.d-aGj9QkWt';
+import { Button } from '@mui/material';
 
 const SafeHebrewText = ({ htmlContent }: { htmlContent: string | Node }) => {
   const safeHTML = DOMPurify.sanitize(htmlContent);
@@ -61,9 +60,9 @@ const Bible = () => {
             (chap: any, index: any) =>
               chap &&
               chapter != chap && (
-                <button key={index} onClick={() => handleChapterClick(chap)}>
-                  פרק {chap}
-                </button>
+                <Button key={index} onClick={() => handleChapterClick(chap)}>
+                  החלף לפרק {chap}
+                </Button>
               )
           )}
       </div>
