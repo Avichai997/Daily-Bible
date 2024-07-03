@@ -5,8 +5,8 @@ import {
   AccordionDetails,
   Typography,
 } from '@mui/material';
-import cancelIcon from '@Assets/Images/cancelIcon.svg';
-import plusIcon from '@Assets/Images/plusIcon.svg';
+// import cancelIcon from '@Assets/Images/cancelIcon.svg';
+// import plusIcon from '@Assets/Images/plusIcon.svg';
 import { IAccordion } from '@CommonInterfaces';
 import { styleAccordionSummary } from './Accordion.StyleSheet';
 
@@ -27,7 +27,7 @@ const Accordion = ({
     setIsOpen(isOpenAccordion ? panel : false);
   };
   const label = isOpen ? labelOpen : labelClosed;
-  const expandIcon = isOpen ? cancelIcon : plusIcon;
+  // const expandIcon = isOpen ? cancelIcon : plusIcon;
 
   return (
     <MuiAccordion expanded={isOpen === uniqueId} onChange={handleChange(uniqueId)} sx={accordionSx}>
@@ -36,7 +36,7 @@ const Accordion = ({
           {label || ''}
           {labelDefault || ''}
         </div>
-        <img loading='lazy' src={expandIcon} />
+        {/* <img loading='lazy' src={expandIcon} /> */}
       </AccordionSummary>
       <AccordionDetails>
         {children}
