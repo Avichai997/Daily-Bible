@@ -13,7 +13,6 @@ import { toHebrewJewishDate, toJewishDate } from 'jewish-date';
 //  */
 export function getBookAndChapters() {
   const jewishDate = getJwishDate(new Date());
-  console.log(jewishDate);
   const entry = dailyStudy.find(
     (item: { month: any; day: any }) =>
       item.month === jewishDate.monthName && item.day === jewishDate.day.replace(/["'״׳]/g, '')

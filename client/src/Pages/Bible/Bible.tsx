@@ -36,7 +36,6 @@ const Bible = () => {
         BibleBooks[book.replace(' ', '_') as keyof typeof BibleBooks],
         getGematria(numChapter).toString()
       );
-      console.log('chapter',chapter)
       setData(chapter);
     } else {
       console.error(`Invalid book name: ${book}`);
