@@ -12,18 +12,46 @@ import { toHebrewJewishDate, toJewishDate } from 'jewish-date';
 //  * @returns {Object} - The name of the book and the chapters for that day
 //  */
 export function getBookAndChapters() {
-  const jewishDate = getJwishDate();
-  console.log(jewishDate)
+  const jewishDate = getJwishDate(new Date());
+  console.log(jewishDate);
   const entry = dailyStudy.find(
     (item: { month: any; day: any }) =>
       item.month === jewishDate.monthName && item.day === jewishDate.day.replace(/["'״׳]/g, '')
   );
+  console.log(entry);
+
   if (entry) {
-    const [chapter1, chapter2, chapter3] = entry.chapters.split(' ');
-    return {
-      book: entry.book,
-      chapters: { chapter1, chapter2, chapter3},
+    const chaptersArray = entry.chapters.split(' ');
+    let bookChapters = {
+      chapter1: { book: '', chapter: '' },
+      chapter2: { book: '', chapter: '' },
+      chapter3: { book: '', chapter: '' },
     };
+
+    if (chaptersArray.length >= 2 && chaptersArray[0] > chaptersArray[1]) {
+      bookChapters.chapter2 = { book: entry.book, chapter: chaptersArray[1] };
+
+      // Find the previous book for the first chapter
+      const currentDate = new Date();
+      const previousDate = new Date(currentDate.setDate(currentDate.getDate() - 1));
+      const previousJewishDate = getJwishDate(previousDate);
+      const previousEntry = dailyStudy.find(
+        (item: { month: any; day: any }) =>
+          item.month === previousJewishDate.monthName &&
+          item.day === previousJewishDate.day.replace(/["'״׳]/g, '')
+      );
+
+      if (previousEntry) {
+        bookChapters.chapter1 = { book: previousEntry.book, chapter: chaptersArray[0] };
+      }
+    } else {
+      bookChapters.chapter1 = { book: entry.book, chapter: chaptersArray[0] };
+      if (chaptersArray.length > 2) {
+        bookChapters.chapter3 = { book: entry.book, chapter: chaptersArray[2] };
+      }
+    }
+
+    return bookChapters;
   } else {
     return null;
   }
@@ -53,7 +81,7 @@ export function convertToEmbedUrl(spotifyUrl: string): string {
   return '';
 }
 
-const getJwishDate = () => {
-  const jewishDate = toJewishDate(new Date());
+const getJwishDate = (date: Date) => {
+  const jewishDate = toJewishDate(date);
   return toHebrewJewishDate(jewishDate);
 };

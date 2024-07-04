@@ -5,7 +5,7 @@ import SpotifyEmbed from '@Components/Spotfy/Spotify';
 import { useEffect, useState } from 'react';
 import { getBookAndChapters, getGematria } from '@Components/Spotfy/utils/searchDay';
 import { BibleBooks } from './Constants';
-import { chaptersType, studyDailyType } from './Bible.types';
+import { studyDailyType } from './Bible.types';
 import { Button } from '@mui/material';
 
 const SafeHebrewText = ({ htmlContent }: { htmlContent: string | Node }) => {
@@ -18,50 +18,47 @@ const Bible = () => {
   const [data, setData] = useState<string[][]>([]);
   const [chapter, setChapter] = useState('');
   const [book, setBook] = useState('');
-  const [chapters, setchapters] = useState<chaptersType>();
   const [studyDaily, setStudyDaily] = useState<studyDailyType>();
 
   useEffect(() => {
     const result = getBookAndChapters();
     if (result) {
-      setchapters(result.chapters);
-      setBook(result.book);
-      setChapter(result.chapters.chapter1);
+      setBook(result.chapter1.book);
+      setChapter(result.chapter1.chapter);
       setStudyDaily(result);
-      getChapterDaily(result, result.chapters.chapter1);
+      getChapterDaily(result.chapter1.book, result.chapter1.chapter);
     }
   }, []);
 
-  const getChapterDaily = async (result: studyDailyType, numChapter: string) => {
-    if (BibleBooks[result.book as keyof typeof BibleBooks]) {
+  const getChapterDaily = async (book: string, numChapter: string) => {
+    if (BibleBooks[book.replace(' ', '_') as keyof typeof BibleBooks]) {
       let chapter = await getChapterSefaria(
-        BibleBooks[result.book as keyof typeof BibleBooks],
+        BibleBooks[book.replace(' ', '_') as keyof typeof BibleBooks],
         getGematria(numChapter).toString()
       );
+      console.log('chapter',chapter)
       setData(chapter);
     } else {
-      console.error(`Invalid book name: ${result.book}`);
+      console.error(`Invalid book name: ${book}`);
     }
   };
 
-  const handleChapterClick = (chapter: string) => {
-    console.log(studyDaily);
-    if (studyDaily) {
-      getChapterDaily(studyDaily, chapter);
-      setChapter(chapter);
-    }
+  const handleChapterClick = (book: string, chapter: string) => {
+    getChapterDaily(book, chapter);
+    setChapter(chapter);
+    setBook(book);
   };
   return (
     <>
       <div>
         <h2 className={style['daily-lesson-header']}>הלימוד היומי פרק {chapter}</h2>
-        {chapters &&
-          Object.values(chapters).map(
+        {studyDaily &&
+          Object.values(studyDaily).map(
             (chap: any, index: any) =>
-              chap &&
-              chapter != chap && (
-                <Button key={index} onClick={() => handleChapterClick(chap)}>
-                  החלף לפרק {chap}
+              chap.chapter &&
+              chapter != chap.chapter && (
+                <Button key={index} onClick={() => handleChapterClick(chap.book, chap.chapter)}>
+                  החלף לפרק {chap.chapter}
                 </Button>
               )
           )}

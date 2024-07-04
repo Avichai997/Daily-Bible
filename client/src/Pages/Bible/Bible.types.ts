@@ -1,6 +1,8 @@
-export type studyDailyType = {
-  book: string;
-  chapters: chaptersType;
-};
+// export type studyDailyType = {
+//   book: string;
+//   chapters: chaptersType;
+// };
 
-export type chaptersType = { chapter1: string; chapter2: string; chapter3: string };
+export type chapter = {book: string; chapter: string};
+
+export type studyDailyType = { chapter1: chapter; chapter2: chapter; chapter3: chapter };

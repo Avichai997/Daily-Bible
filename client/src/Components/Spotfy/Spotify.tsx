@@ -37,7 +37,7 @@ const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ book, chapter }) => {
         width='500'
         height='200'
         frameBorder='0'
-        allowTransparency={true}
+        // allowTransparency={true}
         allow='encrypted-media'
         title='Spotify Player'
       ></iframe>
