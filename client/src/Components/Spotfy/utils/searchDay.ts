@@ -1,7 +1,9 @@
-import fs from 'fs';
-import dailyStudy from '../dailyStudy.json';
-import { Gematria } from './spotify.consts';
+/* eslint-disable @cspell/spellchecker */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { toHebrewJewishDate, toJewishDate } from 'jewish-date';
+import { StudyDailyType } from '@Pages/Bible/Bible.types';
+import dailyStudy from '../dailyStudy.json';
+import { IGematria } from './spotify.consts';
 // const data = JSON.parse(fs.readFileSync('./output.json', 'utf-8'));
 
 // /**
@@ -11,76 +13,81 @@ import { toHebrewJewishDate, toJewishDate } from 'jewish-date';
 //  * @param {string} day - day (למשל 'ו')
 //  * @returns {Object} - The name of the book and the chapters for that day
 //  */
+
+const getJewishDate = (date: Date) => {
+  const jewishDate = toJewishDate(date);
+
+  return toHebrewJewishDate(jewishDate);
+};
+
 export function getBookAndChapters() {
-  const jewishDate = getJwishDate(new Date());
+  const jewishDate = getJewishDate(new Date());
   const entry = dailyStudy.find(
-    (item: { month: any; day: any }) =>
+    (item) =>
       item.month === jewishDate.monthName && item.day === jewishDate.day.replace(/["'״׳]/g, '')
   );
-  console.log(entry);
 
-  if (entry) {
-    const chaptersArray = entry.chapters.split(' ');
-    let bookChapters = {
-      chapter1: { book: '', chapter: '' },
-      chapter2: { book: '', chapter: '' },
-      chapter3: { book: '', chapter: '' },
-    };
-
-    if (chaptersArray.length >= 2 && chaptersArray[0] > chaptersArray[1]) {
-      bookChapters.chapter2 = { book: entry.book, chapter: chaptersArray[1] };
-
-      // Find the previous book for the first chapter
-      const currentDate = new Date();
-      const previousDate = new Date(currentDate.setDate(currentDate.getDate() - 1));
-      const previousJewishDate = getJwishDate(previousDate);
-      const previousEntry = dailyStudy.find(
-        (item: { month: any; day: any }) =>
-          item.month === previousJewishDate.monthName &&
-          item.day === previousJewishDate.day.replace(/["'״׳]/g, '')
-      );
-
-      if (previousEntry) {
-        bookChapters.chapter1 = { book: previousEntry.book, chapter: chaptersArray[0] };
-      }
-    } else {
-      bookChapters.chapter1 = { book: entry.book, chapter: chaptersArray[0] };
-      if (chaptersArray.length > 2) {
-        bookChapters.chapter3 = { book: entry.book, chapter: chaptersArray[2] };
-      }
-    }
-
-    return bookChapters;
-  } else {
+  if (!entry) {
     return null;
   }
+
+  const chaptersArray = entry.chapters.split(' ');
+  const bookChapters: StudyDailyType = {
+    chapter1: { book: '', chapter: '' },
+    chapter2: { book: '', chapter: '' },
+    chapter3: { book: '', chapter: '' },
+  };
+
+  if (chaptersArray.length >= 2 && chaptersArray[0] > chaptersArray[1]) {
+    bookChapters.chapter2 = { book: entry.book, chapter: chaptersArray[1] };
+
+    // Find the previous book for the first chapter
+    const currentDate = new Date();
+    const previousDate = new Date(currentDate.setDate(currentDate.getDate() - 1));
+    const previousJewishDate = getJewishDate(previousDate);
+    const previousEntry = dailyStudy.find(
+      (item) =>
+        item.month === previousJewishDate.monthName &&
+        item.day === previousJewishDate.day.replace(/["'״׳]/g, '')
+    );
+
+    if (previousEntry) {
+      bookChapters.chapter1 = { book: previousEntry.book, chapter: chaptersArray[0] };
+    }
+  } else {
+    bookChapters.chapter1 = { book: entry.book, chapter: chaptersArray[0] };
+    if (chaptersArray.length > 2) {
+      bookChapters.chapter3 = { book: entry.book, chapter: chaptersArray[2] };
+    }
+  }
+
+  return bookChapters;
 }
 
 export function getGematria(value: string): number {
   let total = 0;
-  for (let char of value) {
-    if (Gematria[char as keyof typeof Gematria] !== undefined) {
-      total += Gematria[char as keyof typeof Gematria];
+  for (const char of value) {
+    if (IGematria[char as keyof typeof IGematria] !== undefined) {
+      total += IGematria[char as keyof typeof IGematria];
     }
   }
+
   return total;
 }
 
 export function splitChapters(chapters: string): [string, string] {
   const [chapter1, chapter2] = chapters.split(' ');
+
   return [chapter1, chapter2];
 }
 
 export function convertToEmbedUrl(spotifyUrl: string): string {
-  const episodeIdMatch = spotifyUrl.match(/episode\/([^?]+)/);
+  const episodeIdMatch = spotifyUrl?.match(/episode\/([^?]+)/);
   if (episodeIdMatch) {
     const episodeId = episodeIdMatch[1];
+
     return `https://open.spotify.com/embed/episode/${episodeId}?utm_source=generator`;
   }
+
   return '';
 }
-
-const getJwishDate = (date: Date) => {
-  const jewishDate = toJewishDate(date);
-  return toHebrewJewishDate(jewishDate);
-};

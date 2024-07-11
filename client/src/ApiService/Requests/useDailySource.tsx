@@ -76,6 +76,7 @@ export const getChapterSefaria = async (book: string, chapter: string): Promise<
     (res) => res.json() as Promise<ILessonSource>
   );
   console.log(res);
+
   return res?.versions?.[0]?.text;
 };
 
@@ -83,7 +84,7 @@ export const useChapterSefaria = (book: string, chapter: string, enabled: boolea
   return useQuery<string[][], Error>({
     queryKey: ['DAILY_LESSON_SOURCE_KEY', book, chapter],
     queryFn: () => getChapterSefaria(book, chapter),
-    enabled: enabled,
+    enabled,
     staleTime: 0,
     cacheTime: 0,
     initialData: [],

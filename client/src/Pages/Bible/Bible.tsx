@@ -1,22 +1,24 @@
 import { useChapterSefaria } from '@ApiService/Requests/useDailySource';
 import DOMPurify from 'dompurify';
-import style from './Bible.module.scss';
 import SpotifyEmbed from '@Components/Spotfy/Spotify';
 import { useEffect, useState } from 'react';
 import { getBookAndChapters, getGematria } from '@Components/Spotfy/utils/searchDay';
-import { BibleBooks } from './Constants';
-import { studyDailyType } from './Bible.types';
 import { Button } from '@mui/material';
+import { BibleBooks } from './Constants';
+import { StudyDailyType } from './Bible.types';
+import style from './Bible.module.scss';
 
 const SafeHebrewText = ({ htmlContent }: { htmlContent: string | Node }) => {
   const safeHTML = DOMPurify.sanitize(htmlContent);
+
+  // eslint-disable-next-line react/no-danger
   return <div dangerouslySetInnerHTML={{ __html: safeHTML }} />;
 };
 
 const Bible = () => {
   const [chapter, setChapter] = useState('');
   const [book, setBook] = useState('');
-  const [studyDaily, setStudyDaily] = useState<studyDailyType>();
+  const [studyDaily, setStudyDaily] = useState<StudyDailyType>();
 
   useEffect(() => {
     const result = getBookAndChapters();
@@ -27,7 +29,7 @@ const Bible = () => {
     }
   }, []);
 
-  const { data, error, isLoading } = useChapterSefaria(
+  const { data } = useChapterSefaria(
     BibleBooks[book.replace(' ', '_') as keyof typeof BibleBooks],
     getGematria(chapter).toString(),
     !!book && !!chapter
@@ -37,13 +39,14 @@ const Bible = () => {
     setChapter(chapter);
     setBook(book);
   };
+
   return (
     <>
       <div>
         <h2 className={style['daily-lesson-header']}>הלימוד היומי פרק {chapter}</h2>
         {studyDaily &&
           Object.values(studyDaily).map(
-            (chap: any, index: any) =>
+            (chap, index) =>
               chap.chapter &&
               chapter !== chap.chapter && (
                 <Button key={index} onClick={() => handleChapterClick(chap.book, chap.chapter)}>
@@ -56,6 +59,7 @@ const Bible = () => {
         <div className={style['lesson-source-container']}>
           {data.reverse().map((episode, index) => {
             const episodeArray = Array.isArray(episode) ? episode : [episode];
+
             return (
               <div key={index} className='episode'>
                 <SafeHebrewText htmlContent={episodeArray.join(' ')} />
@@ -63,7 +67,7 @@ const Bible = () => {
             );
           })}
         </div>
-        {book && chapter && <SpotifyEmbed book={book} chapter={chapter} />}
+        <SpotifyEmbed book={book} chapter={chapter} />
       </div>
     </>
   );
