@@ -75,7 +75,6 @@ export const getChapterSefaria = async (book: string, chapter: string): Promise<
   const res = await fetch(`${SEFARIA_URL}/v3/texts/${book}_${chapter}?version=hebrew`).then(
     (res) => res.json() as Promise<ILessonSource>
   );
-  console.log(res);
 
   return res?.versions?.[0]?.text;
 };

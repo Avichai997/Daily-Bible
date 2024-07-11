@@ -1,6 +1,6 @@
+/* eslint-disable prefer-destructuring */
 import fs from 'fs';
-
-const xlsx = require('xlsx');
+import xlsx from 'xlsx';
 
 // Load the Excel file
 const workbook = xlsx.readFile('./studyBoard.xlsx');
@@ -11,12 +11,12 @@ const sheet = workbook.Sheets[sheetName];
 const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1 });
 
 // Process the data into the desired format
-const formattedData: { year: string; month: string; day: any; book: string; chapters: any }[] = [];
+const formattedData = [];
 let currentYear = '';
 let currentMonth = '';
 let currentBook = '';
 
-jsonData.forEach((row: any[]) => {
+jsonData.forEach((row) => {
   if (row[0]) currentYear = row[0];
   if (row[1]) currentMonth = row[1];
   if (row[3]) currentBook = row[3];

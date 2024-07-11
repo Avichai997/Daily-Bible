@@ -34,13 +34,14 @@ export async function getEpisodeUrl(bookName: string, chapterName: string): Prom
   );
 
   const query = `${bookName} ${chapterName}`;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const searchResults = await searchSpotify(accessToken, query);
 
-  if (searchResults?.episodes?.items?.length > 0) {
-    const episode = searchResults.episodes.items[0];
+  // if (searchResults?.episodes?.items?.length > 0) {
+  //   const episode = searchResults.episodes.items[0];
 
-    return episode.external_urls.spotify;
-  }
+  //   return episode.external_urls.spotify;
+  // }
 
   return null;
 }
