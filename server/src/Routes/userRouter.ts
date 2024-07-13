@@ -18,6 +18,7 @@ import {
   updatePassword,
   logout,
   restrictTo,
+  loginWithGgl,
   // sendConfirmEmail,
 } from '@Controllers/authController';
 import { uploadUserPhoto, resizeUserPhoto, setImageToField } from '@Middlewares/uploadImage';
@@ -27,6 +28,7 @@ const router = express.Router();
 router
   .post('/signup', signup)
   .post('/login', login)
+  .post('/loginWithGgl', loginWithGgl)
   .get('/logout', logout)
   // .post('/forgotPassword', forgotPassword)
   .patch('/resetPassword/:token', resetPassword)

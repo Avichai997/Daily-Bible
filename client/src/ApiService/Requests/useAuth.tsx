@@ -146,12 +146,14 @@ export const useAuth = () => {
 
   const loginUser = (
     data: ILoginRequest,
+    path: string = 'login',
     options?: UseMutationOptions<ILoginSignupResponse, unknown, IMutation<ILoginRequest>>
   ) => {
+    console.log(JSON.stringify(data));
     LoginUser(
       {
         method: 'Post',
-        path: `${USER_QUERY_KEY}/login`,
+        path: `${USER_QUERY_KEY}/${path}`,
         data,
       },
       {

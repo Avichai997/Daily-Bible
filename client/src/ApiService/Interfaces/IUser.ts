@@ -44,7 +44,7 @@ export interface ISignupRequest {
 }
 export interface ILoginRequest {
   email: string;
-  password: string;
+  password?: string;
 }
 export interface ILoginSignupResponse {
   status?: string;
