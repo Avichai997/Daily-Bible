@@ -1,49 +1,53 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { useChapterSefaria } from '@ApiService/Requests/useDailySource';
-import DOMPurify from 'dompurify';
 import SpotifyEmbed from '@Components/Spotfy/Spotify';
-import { useEffect, useState } from 'react';
-import { getBookAndChapters, getGematria } from '@Components/Spotfy/utils/searchDay';
+import { FC, useCallback, useState } from 'react';
+import { getGematria } from '@Components/Spotfy/utils/searchDay';
 import { Button } from '@mui/material';
+import { ReactJewishDatePicker } from 'react-jewish-datepicker';
 import { BibleBooks } from './Constants';
 import { StudyDailyType } from './Bible.types';
+import { SafeHebrewText } from './SafeText/SafeText';
 import style from './Bible.module.scss';
+import 'react-jewish-datepicker/dist/index.css';
+import './react-jewish-datepicker.scss';
 
-const SafeHebrewText = ({ htmlContent }: { htmlContent: string | Node }) => {
-  const safeHTML = DOMPurify.sanitize(htmlContent);
-
-  // eslint-disable-next-line react/no-danger
-  return <div dangerouslySetInnerHTML={{ __html: safeHTML }} />;
+type BibleProps = {
+  day: Date;
+  setDay: (date: Date) => void;
+  studyDaily: StudyDailyType;
 };
 
-const Bible = () => {
-  const [chapter, setChapter] = useState('');
-  const [book, setBook] = useState('');
-  const [studyDaily, setStudyDaily] = useState<StudyDailyType>();
-
-  useEffect(() => {
-    const result = getBookAndChapters();
-    if (result) {
-      setBook(result.chapter1.book);
-      setChapter(result.chapter1.chapter);
-      setStudyDaily(result);
-    }
-  }, []);
-
+const Bible: FC<BibleProps> = ({ day, setDay, studyDaily }) => {
+  const [chapter, setChapter] = useState(studyDaily.chapter1.chapter);
+  const [book, setBook] = useState(studyDaily.chapter1.book);
+  const [prevStudyDaily, setPrevStudyDaily] = useState<StudyDailyType>(studyDaily);
   const { data } = useChapterSefaria(
     BibleBooks[book.replace(' ', '_') as keyof typeof BibleBooks],
     getGematria(chapter).toString(),
     !!book && !!chapter
   );
 
-  const handleChapterClick = (book: string, chapter: string) => {
-    setChapter(chapter);
-    setBook(book);
-  };
+  if (studyDaily !== prevStudyDaily) {
+    setPrevStudyDaily(studyDaily);
+    setChapter(studyDaily.chapter1.chapter);
+    setBook(studyDaily.chapter1.book);
+  }
+
+  const handleChapterClick = useCallback(
+    (book: string, chapter: string) => {
+      setChapter(chapter);
+      setBook(book);
+    },
+    [setBook, setChapter]
+  );
 
   return (
     <>
       <div>
-        <h2 className={style['daily-lesson-header']}>הלימוד היומי פרק {chapter}</h2>
+        <h2 className={style['daily-lesson-header']}>
+          הלימוד היומי - ספר {book} פרק {chapter}
+        </h2>
         {studyDaily &&
           Object.values(studyDaily).map(
             (chap, index) =>
@@ -67,7 +71,15 @@ const Bible = () => {
             );
           })}
         </div>
-        <SpotifyEmbed book={book} chapter={chapter} />
+        <div className={style['lesson-left-side']}>
+          <ReactJewishDatePicker
+            value={day}
+            isHebrew
+            onClick={(day) => setDay(day.date)}
+            className={style['date-picker']}
+          />
+          <SpotifyEmbed book={book} chapter={chapter} />
+        </div>
       </div>
     </>
   );

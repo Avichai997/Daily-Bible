@@ -20,8 +20,8 @@ const getJewishDate = (date: Date) => {
   return toHebrewJewishDate(jewishDate);
 };
 
-export function getBookAndChapters() {
-  const jewishDate = getJewishDate(new Date());
+export function getBookAndChapters(date = new Date()) {
+  const jewishDate = getJewishDate(date);
   const entry = dailyStudy.find(
     (item) =>
       item.month === jewishDate.monthName && item.day === jewishDate.day.replace(/["'״׳]/g, '')
