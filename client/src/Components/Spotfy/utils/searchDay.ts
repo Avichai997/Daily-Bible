@@ -45,6 +45,7 @@ export function getBookAndChapters() {
       }
     } else {
       bookChapters.chapter1 = { book: entry.book, chapter: chaptersArray[0] };
+      bookChapters.chapter2 = { book: entry.book, chapter: chaptersArray[1] };
       if (chaptersArray.length > 2) {
         bookChapters.chapter3 = { book: entry.book, chapter: chaptersArray[2] };
       }
