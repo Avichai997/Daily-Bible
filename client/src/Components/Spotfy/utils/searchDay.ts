@@ -30,7 +30,6 @@ export function getBookAndChapters(date = new Date()) {
   if (!entry) {
     return null;
   }
-
   const chaptersArray = entry.chapters.split(' ');
   const bookChapters: StudyDailyType = {
     chapter1: { book: '', chapter: '' },
@@ -56,6 +55,7 @@ export function getBookAndChapters(date = new Date()) {
     }
   } else {
     bookChapters.chapter1 = { book: entry.book, chapter: chaptersArray[0] };
+    bookChapters.chapter2 = { book: entry.book, chapter: chaptersArray[1] };
     if (chaptersArray.length > 2) {
       bookChapters.chapter3 = { book: entry.book, chapter: chaptersArray[2] };
     }
