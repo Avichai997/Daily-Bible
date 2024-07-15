@@ -14,7 +14,7 @@ import {
   ErrorFallback,
   WhyDailyBible,
 } from '@Utils/LazySuspense';
-import Bible from '@Pages/Bible/Bible';
+import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
 
 const App = () => {
   useUser();
@@ -32,7 +32,7 @@ const App = () => {
             </ProtectRoute>
           }
         >
-          <Route index element={<Bible />} />
+          <Route index element={<LessonContainer />} />
           <Route path='/Profile' element={<ProfilePage />} />
           <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />

@@ -48,6 +48,6 @@
     "src",
     "package.json",
     "ecosystem.config.cjs",
-    "src/**/*.json" ,
+    "src/**/*.json"
   ]
 }
