@@ -52,6 +52,9 @@ export function getBookAndChapters(date = new Date()) {
 
     if (previousEntry) {
       bookChapters.chapter1 = { book: previousEntry.book, chapter: chaptersArray[0] };
+      if (previousEntry) {
+        bookChapters.chapter1 = { book: previousEntry.book, chapter: chaptersArray[0] };
+      }
     }
   } else {
     bookChapters.chapter1 = { book: entry.book, chapter: chaptersArray[0] };
