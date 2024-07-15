@@ -1,5 +1,5 @@
 import { Document, ObjectId } from 'mongoose';
-import { IUsers } from './IUsers'; // Import the IUser interface
+import { IUsers } from './IUsers';
 
 export interface IPosts {
   isNew: boolean;
@@ -9,7 +9,7 @@ export interface IPosts {
   content: string;
   photo: string;
   authorId: IUsers['_id'];
-  createdAt: Date | number;
+  lastUpdateAt: Date | number; ///yuda
 
   active: boolean;
 }

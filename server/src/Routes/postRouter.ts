@@ -15,14 +15,20 @@ const router = express.Router();
 router
   .route('/')
   .get(getAllPostsHandler)
-  .post(protect, restrictTo('admin'), createPostHandler)
-  .patch(protect, restrictTo('admin'), bulkUpdatePostsHandler)
-  .delete(protect, restrictTo('admin'), deleteManyPostsHandler);
+  .post(createPostHandler) //.post(protect, restrictTo('admin'), createPostHandler)
+  .patch(bulkUpdatePostsHandler)
+  .delete(deleteManyPostsHandler);
+//.post(protect, restrictTo('admin'), createPostHandler)
+//.patch(protect, restrictTo('admin'), bulkUpdatePostsHandler)
+//.delete(protect, restrictTo('admin'), deleteManyPostsHandler);
 
 router
   .route('/:id')
   .get(getPostHandler)
-  .patch(protect, restrictTo('admin'), updatePostHandler)
-  .delete(protect, restrictTo('admin'), deletePostHandler);
+  .post(createPostHandler)
+  .patch(updatePostHandler)
+  .delete(deletePostHandler);
+//.patch(protect, restrictTo('admin'), updatePostHandler)
+//.delete(protect, restrictTo('admin'), deletePostHandler);
 
 export default router;

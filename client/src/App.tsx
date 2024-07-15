@@ -14,6 +14,8 @@ import {
   ErrorFallback,
 } from '@Utils/LazySuspense';
 import Bible from '@Pages/Bible/Bible';
+import EditPost from '@Pages/EditPost/EditPost';
+import PostPage from '@Pages/PostPage/PostPage';
 
 const App = () => {
   useUser();
@@ -35,8 +37,10 @@ const App = () => {
           <Route path='/Profile' element={<ProfilePage />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
         </Route>
-
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
+        <Route path='/editPost' element={<EditPost />} />
+        <Route path='/editPost/:postId' element={<EditPost />} />
+        <Route path='/posts/:postId' element={<PostPage />} />
         <Route path='*' element={<NoMatch404Page />} />
       </Routes>
     </ErrorBoundary>

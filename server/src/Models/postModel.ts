@@ -12,8 +12,6 @@ const postSchema = new Schema<IPosts>(
       required: [true, 'חובה להזין כותרת לפוסט'],
       minlength: 2,
       maxlength: 40,
-
-      
     },
     photo: { type: String, default: 'default.jpg' },
     authorId: {
@@ -21,10 +19,15 @@ const postSchema = new Schema<IPosts>(
       ref: 'User',
       required: [true, 'חובה להזין מחבר לפוסט'],
     },
-    postChangedAt: Date, // changed or created
-    active: {
-      type: Boolean,
-      default: true,
+    content: {
+      type: String,
+      required: [true, 'חובה להזין תוכן לפוסט'],
+      minlength: 2,
+      maxlength: 500,
+    },
+    lastUpdateAt: {
+      type: Date,
+      default: Date.now,
       select: false,
     },
   },
@@ -41,10 +44,9 @@ postSchema.virtual<IPosts>('posts', {
   //
   //
 });
-//
-//
-//
-//
+
+
+
 const Post = model<IPosts>('Post', postSchema);
 
 export default Post;
