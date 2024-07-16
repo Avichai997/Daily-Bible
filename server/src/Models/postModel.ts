@@ -25,11 +25,20 @@ const postSchema = new Schema<IPosts>(
       minlength: 2,
       maxlength: 500,
     },
-    lastUpdateAt: {
-      type: Date,
-      default: Date.now,
-      select: false,
-    },
+    comments: [
+      {
+        comment: {
+          type: String,
+          required: [true, 'חובה להזין תוכן לתגובה'],
+          minlength: 2,
+          maxlength: 100,
+        },
+        user: {
+          type: String,
+          required: [true],
+        },
+      },
+    ],
   },
   {
     timestamps: true,
@@ -44,8 +53,6 @@ postSchema.virtual<IPosts>('posts', {
   //
   //
 });
-
-
 
 const Post = model<IPosts>('Post', postSchema);
 

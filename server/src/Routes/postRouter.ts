@@ -31,4 +31,6 @@ router
 //.patch(protect, restrictTo('admin'), updatePostHandler)
 //.delete(protect, restrictTo('admin'), deletePostHandler);
 
+router.route('/:id/comments').get(getPostHandler).patch(updatePostHandler);
+
 export default router;

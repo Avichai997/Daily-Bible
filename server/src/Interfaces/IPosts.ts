@@ -9,7 +9,7 @@ export interface IPosts {
   content: string;
   photo: string;
   authorId: IUsers['_id'];
-  lastUpdateAt: Date | number; ///yuda
+  comments: { comment: string; user: IUsers['_id'] }[];
 
   active: boolean;
 }
