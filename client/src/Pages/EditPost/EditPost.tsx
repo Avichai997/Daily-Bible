@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEventHandler, useEffect, useState } from 'react';
 import axios from 'axios';
+import { IPost } from '@ApiService/Interfaces/IPost';
 import { useNavigate, useParams } from 'react-router-dom';
 import './EditPost.scss';
-import uploadImg from '../../ApiService/uploadFile/uploadFileService';
-import { IPost } from '../../Components/Post/Post';
-import { config } from 'process';
-import { c } from 'vite/dist/node/types.d-aGj9QkWt';
-import { useUser } from '@ApiService/Requests/useUser';
+import uploadImg, { IUploadResponse } from '@ApiService/uploadFile/uploadFileService';
+import { ToastError, ToastSuccess } from '@Components/Toastify/Toasts';
 
 const EditPost = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [post, setPost] = useState<IPost>();
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState('');
-  const [photo, setPhoto] = useState(''); //'../server/public/img/users/default.jpg'
-  const authorId = '6681306d4cd70a8f3428ddf2'; //useContext(UserContext).user._id;
+  const [photo, setPhoto] = useState(''); // '../server/public/img/users/default.jpg'
+  const authorId = '6681306d4cd70a8f3428ddf2'; // useContext(UserContext).user._id;
+
   useEffect(() => {
     if (post?.photo) {
       setPhotoPreviewUrl(post.photo);
       setPhoto(post.photo);
     }
   }, [post]);
+
   let postId: string = '';
   if (params.postId) {
     postId = params.postId;
@@ -31,12 +31,12 @@ const EditPost = () => {
     });
   }, [postId]);
 
-  const handlePhotoChange = (e) => {
+  const handlePhotoChange: ChangeEventHandler<HTMLInputElement> | undefined = (e) => {
     e.preventDefault();
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    const reader = new FileReader();
+    const file = e?.target?.files?.[0];
     reader.onloadend = () => {
-      setPhotoPreviewUrl(reader.result);
+      if (reader?.result) setPhotoPreviewUrl(String(reader.result));
     };
     setPhoto(file);
     reader.readAsDataURL(file);
@@ -52,14 +52,12 @@ const EditPost = () => {
 
     if (imgFile) {
       const uploadResponse: IUploadResponse = await uploadImg(imgFile);
-      console.log('uploadResponse', uploadResponse);
       setPhotoPreviewUrl(uploadResponse);
       setPhoto(uploadResponse);
-      console.log('photoPreviewUrl', photoPreviewUrl);
-      console.log('photo', photo);
     }
     if (title === '' || content === '') {
       alert('Please fill all fields');
+
       return;
     }
     const post = {
@@ -67,8 +65,8 @@ const EditPost = () => {
       content,
       photo,
       authorId,
-    }; ///////add authorization config
-    const config = {
+    }; // TODO: add authorization config
+  const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
@@ -76,16 +74,15 @@ const EditPost = () => {
       },
     };
     const url =
-      postId === '' ? 'http://localhost:5000/posts' : 'http://localhost:5000/posts/' + postId;
+      postId === '' ? 'http://localhost:5000/posts' : `http://localhost:5000/posts/${postId}`;
     const method = postId === '' ? axios.post : axios.patch;
     method(url, post, config)
-      .then((response) => {
-        alert(postId === '' ? 'Post added' : 'Post updated');
-        console.log(response.data);
-        navigate(-1); //change to navigate to postlisthandler
+      .then(() => {
+        ToastSuccess(postId === '' ? 'Post added' : 'Post updated');
+        navigate(-1); // TODO: change to navigate to post list handler
       })
       .catch((error) => {
-        console.log(error);
+        ToastError(error);
       });
   };
 
@@ -101,7 +98,7 @@ const EditPost = () => {
           placeholder='כותרת'
           defaultValue={post?.title}
           onInput={(e) => {
-            e.currentTarget.style.width = (e.target.value.length + 1) * 8 + 'px';
+            e.currentTarget.style.width = `${(e.target.value.length + 1) * 8}px`;
           }}
         />
         תוכן:
@@ -111,7 +108,7 @@ const EditPost = () => {
           placeholder='תוכן'
           defaultValue={post?.content}
           onInput={(e) => {
-            e.currentTarget.style.width = (e.target.value.length + 1) * 8 + 'px';
+            e.currentTarget.style.width = `${(e.target.value.length + 1) * 8}px`;
           }}
         />
         להוסיף תמונה?

@@ -8,6 +8,11 @@ const routes: SidebarRoutesArray[] = [
     icon: House,
   },
   {
+    path: '/posts',
+    name: 'דברי תורה',
+    icon: House,
+  },
+  {
     path: 'update',
     name: 'הגדרות',
     icon: AppRegistration,

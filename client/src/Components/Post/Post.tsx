@@ -1,19 +1,7 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import React from 'react';
-import { userInfo } from 'os';
+import { useNavigate } from 'react-router-dom';
+import { IPost } from '@ApiService/Interfaces/IPost';
 import PostComments from '../PostComments/PostComments';
-export interface IPost {
-  _id: string;
-  authorId?: string;
-  title: string;
-  content: string;
-  photo?: string;
-  products?: string;
-  comments?: Array<{
-    comment: string;
-    user: string;
-  }>;
-}
+
 interface IProps {
   post: IPost;
   title: string;
@@ -30,7 +18,7 @@ const Post = ({ post }: IProps) => {
       <img style={{ maxWidth: '300px' }} src={post.photo} />
       <button
         onClick={() => {
-          navigate(`/editpost/${post._id}`);
+          navigate(`/editPost/${post.id}`);
         }}
       >
         Edit
