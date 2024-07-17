@@ -1,25 +1,11 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import React from 'react';
-import { userInfo } from 'os';
-import PostComments from '../PostComments/PostComments';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { IPost } from '@ApiService/Interfaces/IPost';
+import PostComments from '../PostComments/PostComments';
 
-export interface IPost {
-  _id: string;
-  authorId?: string;
-  title: string;
-  content: string;
-  photo?: string;
-  products?: string;
-  comments?: Array<{
-    comment: string;
-    user: string;
-  }>;
-}
 interface IProps {
   post: IPost;
   title: string;
-  onRemoveCbk: () => void;
 }
 
 const Post = ({ post }: IProps) => {
@@ -28,7 +14,7 @@ const Post = ({ post }: IProps) => {
     try {
       await axios.delete(`http://localhost:5000/posts/${post._id}`);
     } catch (error) {
-      console.error(error);
+      alert('Error deleting post');
     }
     alert('Post deleted');
     navigate(-1);
@@ -44,7 +30,7 @@ const Post = ({ post }: IProps) => {
         <>
           <button
             onClick={() => {
-              navigate(`/editpost/${post._id}`);
+              navigate(`/editpost/${post.id}`);
             }}
           >
             עריכה

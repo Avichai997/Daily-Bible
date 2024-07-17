@@ -12,10 +12,12 @@ import {
   ProfilePage,
   UpdatePasswordPage,
   ErrorFallback,
+  WhyDailyBible,
 } from '@Utils/LazySuspense';
-import Bible from '@Pages/Bible/Bible';
+import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
 import EditPost from '@Pages/EditPost/EditPost';
 import PostPage from '@Pages/PostPage/PostPage';
+import Posts from '@Pages/Posts/Posts';
 
 const App = () => {
   useUser();
@@ -33,9 +35,11 @@ const App = () => {
             </ProtectRoute>
           }
         >
-          <Route index element={<Bible />} />
+          <Route index element={<LessonContainer />} />
           <Route path='/Profile' element={<ProfilePage />} />
+          <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
+          <Route path='/Posts/' element={<Posts />} />
         </Route>
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
         <Route path='/editPost' element={<EditPost />} />

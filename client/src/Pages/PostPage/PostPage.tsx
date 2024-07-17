@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Post, { IPost, IProps } from '../../Components/Post/Post';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Post from '@Components/Post/Post';
+import { IPost } from '@ApiService/Interfaces/IPost';
 
 const PostPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState<IPost>();
+
   useEffect(() => {
     axios.get<IPost>(`http://localhost:5000/posts/${postId}`).then((response) => {
       setPost(response.data);

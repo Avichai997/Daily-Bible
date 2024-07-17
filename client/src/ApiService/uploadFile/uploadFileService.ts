@@ -1,11 +1,10 @@
 import apiClient from './apiClient';
 
-interface IUploadResponse {
+export interface IUploadResponse {
   url: string;
 }
 const uploadImg = async (photo: File) => {
   return new Promise<string>((resolve, reject) => {
-    console.log('Uploading Image: ' + photo);
     const formData = new FormData();
     if (photo) {
       formData.append('file', photo);
