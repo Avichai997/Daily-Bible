@@ -21,7 +21,7 @@ module.exports = {
     'plugin:@cspell/recommended',
   ],
   plugins: ['react', 'react-hooks', '@typescript-eslint', '@tanstack/query', 'prettier'],
-  ignorePatterns: ['build*', 'src/Assets'],
+  ignorePatterns: ['build*', 'src/Assets', 'ecosystem.config.js'],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {

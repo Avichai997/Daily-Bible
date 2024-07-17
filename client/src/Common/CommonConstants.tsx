@@ -2,6 +2,7 @@
 
 // React Query keys
 export const USER_QUERY_KEY = 'users';
+export const POSTS_QUERY_KEY = 'posts';
 export const DAILY_LESSONS_KEY = 'dailyLessons';
 export const DAILY_LESSON_SOURCE_KEY = 'dailyLessons';
 

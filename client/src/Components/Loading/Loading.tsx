@@ -6,9 +6,10 @@ import classes from './Loading.module.scss';
 const Loading = () => {
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
+  const open = !!(isFetching || isMutating);
 
   return createPortal(
-    <Backdrop className={classes.backdrop} open={!!(isFetching || isMutating)}>
+    <Backdrop className={classes.backdrop} open={open}>
       <div className={classes.spinnerContainer}>
         טוען מידע
         <div className={`${classes.spinner} ${classes['spinner-red']}`} />

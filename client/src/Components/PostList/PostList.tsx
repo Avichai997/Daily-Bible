@@ -1,30 +1,17 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Post from '../Post/Post';
 import { useNavigate } from 'react-router-dom';
-
-interface PostData {
-  _id: string;
-  title: string;
-  content: string;
-  owner: string;
-}
+import { useGetAllPosts } from '@ApiService/Requests/usePosts';
 
 const PostList = () => {
-  const [posts, setPosts] = useState<PostData[]>([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    axios.get<PostData[]>('http://localhost:5000/posts').then((response) => {
-      setPosts(response.data);
-    });
-  }, []);
+  const { posts } = useGetAllPosts();
 
   return (
     <div>
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <div
-          key={post._id}
-          onClick={() => navigate(`/posts/${post._id}`)}
+          key={post.id}
+          // onClick={() => navigate(`/posts/${post.id}`)}
+          onClick={() => navigate(`/PostEditForm/${post.id}`)}
           style={{ cursor: 'pointer' }}
         >
           {post.title}

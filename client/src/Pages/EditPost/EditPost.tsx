@@ -5,11 +5,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './EditPost.scss';
 import uploadImg, { IUploadResponse } from '@ApiService/uploadFile/uploadFileService';
 import { ToastError, ToastSuccess } from '@Components/Toastify/Toasts';
+import { useGetAllPosts } from '@ApiService/Requests/usePosts';
 
 const EditPost = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const [post, setPost] = useState<IPost>();
+  const postId = params?.postId;
+  const { posts } = useGetAllPosts();
+  const post = posts?.find((post) => post.id === postId);
+
+  // const [post, setPost] = useState<IPost>();
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState('');
   const [photo, setPhoto] = useState(''); // '../server/public/img/users/default.jpg'
   const authorId = '6681306d4cd70a8f3428ddf2'; // useContext(UserContext).user._id;
@@ -20,16 +25,6 @@ const EditPost = () => {
       setPhoto(post.photo);
     }
   }, [post]);
-
-  let postId: string = '';
-  if (params.postId) {
-    postId = params.postId;
-  }
-  useEffect(() => {
-    axios.get(`http://localhost:5000/posts/${postId}`).then((response) => {
-      setPost(response.data);
-    });
-  }, [postId]);
 
   const handlePhotoChange: ChangeEventHandler<HTMLInputElement> | undefined = (e) => {
     e.preventDefault();
@@ -66,7 +61,7 @@ const EditPost = () => {
       photo,
       authorId,
     }; // TODO: add authorization config
-  const config = {
+    const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
@@ -75,7 +70,7 @@ const EditPost = () => {
     };
     const url =
       postId === '' ? 'http://localhost:5000/posts' : `http://localhost:5000/posts/${postId}`;
-    const method = postId === '' ? axios.post : axios.patch;
+    const method = postId ? axios.post : axios.patch;
     method(url, post, config)
       .then(() => {
         ToastSuccess(postId === '' ? 'Post added' : 'Post updated');

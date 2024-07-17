@@ -13,10 +13,10 @@ import {
   UpdatePasswordPage,
   ErrorFallback,
   WhyDailyBible,
+  PostEditFormPage,
 } from '@Utils/LazySuspense';
 import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
 import EditPost from '@Pages/EditPost/EditPost';
-import PostPage from '@Pages/PostPage/PostPage';
 import Posts from '@Pages/Posts/Posts';
 
 const App = () => {
@@ -27,24 +27,33 @@ const App = () => {
       <Routes>
         <Route path='/Login' element={<LoginPage />} />
         <Route path='/SignUp' element={<SignUpPage />} />
-        <Route
-          path='/'
-          element={
-            <ProtectRoute>
-              <HomePage />
-            </ProtectRoute>
-          }
-        >
+
+        <Route path='/' element={<HomePage />}>
           <Route index element={<LessonContainer />} />
-          <Route path='/Profile' element={<ProfilePage />} />
-          <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
-          <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
           <Route path='/Posts/' element={<Posts />} />
+          <Route path='/PostEditForm' element={<PostEditFormPage />} />
+          <Route path='/PostEditForm/:postId' element={<PostEditFormPage />} />
+          <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
+          <Route path='/editPost' element={<EditPost />} />
+          <Route path='/editPost/:postId' element={<EditPost />} />
+          <Route
+            path='/Profile'
+            element={
+              <ProtectRoute>
+                <ProfilePage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path='/UpdatePassword'
+            element={
+              <ProtectRoute>
+                <UpdatePasswordPage />
+              </ProtectRoute>
+            }
+          />
         </Route>
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
-        <Route path='/editPost' element={<EditPost />} />
-        <Route path='/editPost/:postId' element={<EditPost />} />
-        <Route path='/posts/:postId' element={<PostPage />} />
         <Route path='*' element={<NoMatch404Page />} />
       </Routes>
     </ErrorBoundary>

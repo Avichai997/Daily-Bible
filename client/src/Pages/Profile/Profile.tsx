@@ -15,8 +15,16 @@ import {
 } from '@Utils/yupValidations';
 import { updatedDiff } from 'deep-object-diff';
 import parseGenericObject from '@Utils/parseGenericObject';
-import ImgProfile, { IUpdateProfile } from './ImgProfile';
+import { USER_QUERY_KEY } from '@CommonConstants';
+import ImgProfile, { FormikValues } from './ImgProfile';
 import classes from './Profile.module.scss';
+
+type UpdateProfile = FormikValues<{
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+}>;
 
 const Profile = () => {
   const { user } = useUser();
@@ -25,7 +33,7 @@ const Profile = () => {
   if (!user) return <></>;
 
   const { firstName, lastName, email, phoneNumber, photo } = user;
-  const initialValues: IUpdateProfile = {
+  const initialValues: UpdateProfile = {
     firstName,
     lastName,
     email,
@@ -41,9 +49,9 @@ const Profile = () => {
     photo: yupPhotoUpload,
   });
 
-  const onSubmit = (values: IUpdateProfile) => {
+  const onSubmit = (values: UpdateProfile) => {
     // We want to update only the values that has changed.
-    const updatedValues = updatedDiff(initialValues, values) as Partial<IUpdateProfile>;
+    const updatedValues = updatedDiff(initialValues, values) as Partial<UpdateProfile>;
     const formData = parseGenericObject(updatedValues);
 
     // @ts-ignore
@@ -73,7 +81,7 @@ const Profile = () => {
                     values={formik.values}
                     errors={formik.errors.photo && formik.touched.photo}
                     helperText={<ErrorMessage name='photo' />}
-                    apiUrl={`${import.meta.env.VITE_API_URL}/img/users/`}
+                    apiUrl={`${import.meta.env.VITE_API_URL}/img/${USER_QUERY_KEY}/`}
                   />
 
                   <FormikInput

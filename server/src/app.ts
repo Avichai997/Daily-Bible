@@ -19,7 +19,6 @@ import {
   loginLimiterMiddleware,
 } from '@Middlewares/security';
 import { StatusCodes } from 'http-status-codes';
-import fileRoutes from './Routes/fileRouter';
 
 const app = express();
 
@@ -44,9 +43,6 @@ app.use(hppMiddleware);
 // 2) ROUTES
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
-app.use('/posts', postRouter);
-app.use('/file', fileRoutes); // file upload route//by yuda
-app.use('/public', express.static('public')); //by yuda
 
 app.get('/api/health', (_req, res) => res.status(StatusCodes.OK).json(`Server is healthy`));
 app.all('*', (req, _res, next) =>

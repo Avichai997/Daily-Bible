@@ -15,7 +15,7 @@
     "preview:dev": "vite preview --mode development",
     "preview:prod": "vite preview --mode production",
     "merge": "git pull && git pull origin Development && git merge Development",
-    "lint": "tsc && prettier --write --cache --log-level error . && cspell --cache --no-progress ../**/* && eslint --fix --cache .",
+    "lint": "tsc --noEmit && prettier --write --cache --log-level error --ignore-unknown . && cspell --cache --no-progress . && eslint --fix --cache .",
     "lint:parallel": "concurrently \"cd ../server && npm run lint\" \"npm run lint\""
   },
   "dependencies": {

@@ -9,7 +9,7 @@ const ProtectRoute = ({ children }: IProtectRoute) => {
   const { user } = useUser();
   const location = useLocation();
 
-  return true ? <>{children}</> : <Navigate to='/login' state={{ path: location.pathname }} />;
+  return user?.id ? <>{children}</> : <Navigate to='/login' state={{ path: location.pathname }} />;
 };
 
 export default ProtectRoute;

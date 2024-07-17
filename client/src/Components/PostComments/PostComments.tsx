@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, useLocation } from 'react-router-dom';
+import { IPost } from '@ApiService/Interfaces/IPost';
 
 export interface IPostComments {
-  comments: { comment: string; user: string }[];
+  comments: IPost['comments'];
 }
 
 const PostComments = ({ comments: initialComments }: IPostComments) => {
   const [showTextbox, setShowTextbox] = useState(false);
   const [newComment, setNewComment] = useState('');
-  const location = useLocation();
-  interface ILocationState {
-    comments: Array<{ user: string; comment: string }>;
-  }
-  //const comments = (location.state as ILocationState)?.comments ?? [];
+  // const location = useLocation();
+  // interface ILocationState {
+  //   comments: Array<{ user: string; comment: string }>;
+  // }
+  // const comments = (location.state as ILocationState)?.comments ?? [];
   const comments = initialComments;
   const params = useParams();
   const { postId } = params;
@@ -29,8 +30,7 @@ const PostComments = ({ comments: initialComments }: IPostComments) => {
     const user = 'User'; // get user from context
     try {
       const newComment = { comment, user };
-      console.log('comments:', comments);
-      console.log('postId:', postId);
+
       const response = await axios.patch(
         `http://localhost:5000/posts/${postId}/comments/`,
         { comments: [...comments, newComment] }, // Spread the existing comments and add the new one

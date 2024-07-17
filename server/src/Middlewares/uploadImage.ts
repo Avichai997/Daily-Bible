@@ -28,20 +28,20 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-export const uploadUserPhoto = upload.single('photo');
+export const uploadPhoto = upload.single('photo');
 export const uploadLogo = upload.single('logo');
 
-export const resizeUserPhoto = catchAsync(async (req, _res, next) => {
+export const resizePhoto = catchAsync(async (req, _res, next) => {
   if (!req.file) return next();
 
-  req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`;
+  const imageFolder = req.baseUrl.slice(req.baseUrl.lastIndexOf('/') + 1);
+  req.file.filename = `${imageFolder}-${req.user._id}-${Date.now()}.jpeg`;
 
-  const folderImage = req.baseUrl.slice(req.baseUrl.lastIndexOf('/') + 1);
   await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/${folderImage}/${req.file.filename}`);
+    .toFile(`public/img/${imageFolder}/${req.file.filename}`);
 
   next();
 });

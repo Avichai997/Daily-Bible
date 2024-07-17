@@ -1,48 +1,56 @@
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { IPost } from '@ApiService/Interfaces/IPost';
-import PostComments from '../PostComments/PostComments';
+// import axios from 'axios';
+// import { useNavigate, useParams } from 'react-router-dom';
+// import { useGetAllPosts } from '@ApiService/Requests/usePosts';
+// import { useUser } from '@ApiService/Requests/useUser';
+// import PostComments from '../PostComments/PostComments';
 
-interface IProps {
-  post: IPost;
-  title: string;
-}
+// const Post = () => {
+//   const { user } = useUser();
+//   const params = useParams();
+//   const postId = params?.postId;
 
-const Post = ({ post }: IProps) => {
-  const navigate = useNavigate();
-  const onDeleteClick = async () => {
-    try {
-      await axios.delete(`http://localhost:5000/posts/${post._id}`);
-    } catch (error) {
-      alert('Error deleting post');
-    }
-    alert('Post deleted');
-    navigate(-1);
-  };
+//   const { posts } = useGetAllPosts();
+//   const post = posts?.find((post) => post.id === postId);
 
-  return (
-    <div className='post'>
-      <button onClick={() => navigate(-1)}>חזור</button>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <img style={{ maxWidth: '300px' }} src={post.photo} />
-      {true ? (
-        <>
-          <button
-            onClick={() => {
-              navigate(`/editpost/${post.id}`);
-            }}
-          >
-            עריכה
-          </button>
-          <button onClick={onDeleteClick}>מחיקה</button>
-        </>
-      ) : (
-        <></>
-      )}
-      <PostComments comments={post.comments} />
-    </div>
-  );
-};
+//   if (!post) return <>No post found</>;
 
-export default Post;
+//   const { id, title, content, authorId, photo, comments } = post;
+
+//   const navigate = useNavigate();
+//   const onDeleteClick = async () => {
+//     try {
+//       await axios.delete(`http://localhost:5000/posts/${post._id}`);
+//     } catch (error) {
+//       alert('Error deleting post');
+//     }
+//     alert('Post deleted');
+//     navigate(-1);
+//   };
+
+//   return (
+//     <div className='post'>
+//       <button onClick={() => navigate(-1)}>חזור</button>
+//       <h1>{title}</h1>
+//       <p>{content}</p>
+//       <img style={{ maxWidth: '300px' }} src={photo} />
+
+//       {user?.id === authorId ? (
+//         <>
+//           <button
+//             onClick={() => {
+//               navigate(`/editpost/${id}`);
+//             }}
+//           >
+//             עריכה
+//           </button>
+//           <button onClick={onDeleteClick}>מחיקה</button>
+//         </>
+//       ) : (
+//         <></>
+//       )}
+//       <PostComments comments={comments} />
+//     </div>
+//   );
+// };
+
+// export default Post;
