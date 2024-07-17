@@ -17,6 +17,7 @@ import {
 import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
 import EditPost from '@Pages/EditPost/EditPost';
 import PostPage from '@Pages/PostPage/PostPage';
+import Posts from '@Pages/Posts/Posts';
 
 const App = () => {
   useUser();
@@ -38,8 +39,8 @@ const App = () => {
           <Route path='/Profile' element={<ProfilePage />} />
           <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
           <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
+          <Route path='/Posts/' element={<Posts />} />
         </Route>
-        <Route path='/posts' element={<PostPage />} />
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
         <Route path='/editPost' element={<EditPost />} />
         <Route path='/editPost/:postId' element={<EditPost />} />
