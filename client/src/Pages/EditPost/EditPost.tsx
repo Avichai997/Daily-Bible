@@ -4,9 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './EditPost.scss';
 import uploadImg from '../../ApiService/uploadFile/uploadFileService';
 import { IPost } from '../../Components/Post/Post';
-import { config } from 'process';
-import { c } from 'vite/dist/node/types.d-aGj9QkWt';
-import { useUser } from '@ApiService/Requests/useUser';
 
 const EditPost = () => {
   const navigate = useNavigate();
@@ -91,8 +88,8 @@ const EditPost = () => {
 
   return (
     <div style={{ width: '20%', float: 'left', display: 'flex', flexDirection: 'column' }}>
-      <button onClick={() => navigate(-1)}>Back</button>
-      <h1>Add Post</h1>
+      <button onClick={() => navigate(-1)}>חזור</button>
+      <h1>פירוש חדש</h1>
       <form>
         כותרת:
         <textarea

@@ -6,7 +6,7 @@ const Bible = () => {
   return (
     <div>
       <h1>Home Page for bible learn!</h1>
-      <Link to='/editPost'>Edit Post</Link>
+      <Link to='/editPost'>הוסף הערה/הארה</Link>
       <PostListHandler />
     </div>
   );
