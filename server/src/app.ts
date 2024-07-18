@@ -19,6 +19,7 @@ import {
   loginLimiterMiddleware,
 } from '@Middlewares/security';
 import { StatusCodes } from 'http-status-codes';
+import { setupSwagger } from 'swagger';
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.use(helmetMiddleware);
 app.use(corsMiddleware);
 app.use(morgan('dev'));
 app.use(xssMiddleware);
+
+setupSwagger(app);
+
 app.use('/api', limiterMiddleware);
 loginLimiterMiddleware(app);
 app.use(mongoSanitizeMiddleware);
