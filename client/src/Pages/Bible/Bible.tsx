@@ -4,6 +4,7 @@ import SpotifyEmbed from '@Components/Spotfy/Spotify';
 import { FC, useCallback, useState } from 'react';
 import { getGematria } from '@Components/Spotfy/utils/searchDay';
 import { Button } from '@mui/material';
+import { isDateToday } from '@Utils/Day';
 import { ReactJewishDatePicker } from 'react-jewish-datepicker';
 import { BibleBooks } from './Constants';
 import { StudyDailyType } from './Bible.types';
@@ -42,6 +43,8 @@ const Bible: FC<BibleProps> = ({ day, setDay, studyDaily }) => {
     [setBook, setChapter]
   );
 
+  const resetDate = useCallback(() => setDay(new Date()), [setDay]);
+
   return (
     <>
       <div>
@@ -72,12 +75,22 @@ const Bible: FC<BibleProps> = ({ day, setDay, studyDaily }) => {
           })}
         </div>
         <div className={style['lesson-left-side']}>
-          <ReactJewishDatePicker
-            value={day}
-            isHebrew
-            onClick={(day) => setDay(day.date)}
-            className={style['date-picker']}
-          />
+          <div className={style['date-container']}>
+            <ReactJewishDatePicker
+              value={day}
+              isHebrew
+              onClick={(day) => setDay(day.date)}
+              className={style['date-picker']}
+            />
+
+            <Button
+              disabled={isDateToday(day)}
+              onClick={resetDate}
+              className={style['reset-date-button']}
+            >
+              חזור להיום
+            </Button>
+          </div>
           <SpotifyEmbed book={book} chapter={chapter} />
         </div>
       </div>
