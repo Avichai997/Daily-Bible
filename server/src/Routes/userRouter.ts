@@ -34,7 +34,13 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
  *               email:
+ *                 type: string
+ *               phoneNumber:
  *                 type: string
  *               password:
  *                 type: string
@@ -130,24 +136,32 @@ router.get('/me', getMe, getUser);
  * /users/updateMe:
  *   patch:
  *     summary: Update current user
- *     tags: [Users]
+ *     tags:
+ *       - Users
  *     requestBody:
- *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               firstName:
  *                 type: string
+ *                 default: ""
+ *               lastName:
+ *                 type: string
+ *                 default: ""
  *               email:
  *                 type: string
+ *                 default: ""
+ *               phoneNumber:
+ *                 type: string
+ *                 default: ""
  *               photo:
  *                 type: string
  *                 format: binary
  *     responses:
  *       200:
- *         description: User updated
+ *         description: User updated successfully
  */
 router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
 
@@ -166,9 +180,9 @@ router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
  *             properties:
  *               currentPassword:
  *                 type: string
- *               newPassword:
+ *               password:
  *                 type: string
- *               newPasswordConfirm:
+ *               passwordConfirm:
  *                 type: string
  *     responses:
  *       200:
@@ -203,72 +217,80 @@ router.use(restrictTo('admin'));
  */
 router.route('/').get(getAllUsers);
 
-/**
- * @openapi
- * /users/{id}:
- *   get:
- *     summary: Get a user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: User data
- */
-/**
- * @openapi
- * /users/{id}:
- *   patch:
- *     summary: Update a user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *               photo:
- *                 type: string
- *                 format: binary
- *     responses:
- *       200:
- *         description: User updated
- */
-/**
- * @openapi
- * /users/{id}:
- *   delete:
- *     summary: Delete a user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       204:
- *         description: User deleted
- */
 router
   .route('/:id')
+  /**
+   * @openapi
+   * /users/{id}:
+   *   get:
+   *     summary: Get a user by ID
+   *     tags: [Users]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       200:
+   *         description: User data
+   */
   .get(getUser)
+  /**
+   * @openapi
+   * /users/{id}:
+   *   patch:
+   *     summary: Update a user by ID
+   *     tags: [Users]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         multipart/form-data:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               firstName:
+   *                 type: string
+   *                 default: ""
+   *               lastName:
+   *                 type: string
+   *                 default: ""
+   *               email:
+   *                 type: string
+   *                 default: ""
+   *               phoneNumber:
+   *                 type: string
+   *                 default: ""
+   *               photo:
+   *                 type: string
+   *                 format: binary
+   *     responses:
+   *       200:
+   *         description: User updated
+   */
   .patch(uploadUserPhoto, resizeUserPhoto, updateUser)
+  /**
+   * @openapi
+   * /users/{id}:
+   *   delete:
+   *     summary: Delete a user by ID
+   *     tags: [Users]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       204:
+   *         description: User deleted
+   */
   .delete(deleteUser);
 
 export default router;
