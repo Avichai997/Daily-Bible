@@ -41,7 +41,7 @@ const PostEditForm = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    title: yupTextValidation(),
+    title: yupTextValidation(1, 100),
     content: yupTextValidation(),
     photo: yupPhotoUpload,
   });

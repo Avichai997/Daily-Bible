@@ -20,7 +20,7 @@ import { Edit, ExpandMore, Share, Favorite } from '@mui/icons-material';
 import { useState } from 'react';
 import { POSTS_QUERY_KEY, USER_QUERY_KEY } from '@CommonConstants';
 import PostComments from '@Components/PostComments/PostComments';
-// import classes from './Post.module.scss';
+import classes from './Post.module.scss';
 
 interface IExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -105,7 +105,7 @@ const Post = ({ post }: PostProps) => {
         <Typography variant='h5' color='text.secondary'>
           {post.title}
         </Typography>
-        <Typography variant='body2' color='text.secondary'>
+        <Typography variant='body2' color='text.secondary' className={classes.content}>
           {post.content}
         </Typography>
       </CardContent>

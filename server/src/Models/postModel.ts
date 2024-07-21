@@ -32,7 +32,7 @@ const postSchema = new Schema<IPosts>(
       type: String,
       required: [true, 'חובה להזין כותרת לפוסט'],
       minlength: 2,
-      maxlength: 40,
+      maxlength: 100,
     },
     photo: { type: String, default: 'default.jpg' },
     authorId: {
@@ -44,7 +44,6 @@ const postSchema = new Schema<IPosts>(
       type: String,
       required: [true, 'חובה להזין תוכן לפוסט'],
       minlength: 2,
-      maxlength: 500,
     },
     comments: [commentSchema],
   },

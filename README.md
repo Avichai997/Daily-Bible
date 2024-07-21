@@ -131,3 +131,25 @@ Tests in server side powered by Vitest + MSW.
 # Synchronization
 
 Synchronization is one of the biggest Issues in our project we used **Google Drive** and **GitHub** (Git) to collaborate with each other, and integrate easily into our workflow... The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.
+
+# Deploy to Ec2:
+
+<!-- Update and install prerequisites: -->
+
+sudo apt update
+sudo apt install -y curl software-properties-common
+
+<!-- Install Node.js v20: -->
+
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+<!-- Verify Git installation: -->
+
+sudo apt install -y git
+Install PM2 globally:
+sudo npm install -g pm2
+
+# Clone the GitHub repository:
+
+git clone https://github.com/Avichai997/Daily-Bible.git
