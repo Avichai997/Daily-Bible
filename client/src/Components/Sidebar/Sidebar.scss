@@ -11,7 +11,7 @@
     height: 50px;
     padding: 15px 10px;
     border-bottom: 0.5px solid lightgrey;
-    color: var(--purple);
+    color: black;
   }
 
   .search {
@@ -37,7 +37,7 @@
 
     .icon {
       display: flex;
-      color: var(--purple);
+      color: black;
     }
     .link {
       display: flex;
@@ -56,15 +56,15 @@
 
     .link:hover,
     .menu:hover {
-      border-left: 4px solid #7551f8b0;
-      background: #7551f8b0;
+      border-left: 4px solid var(--color-main);
+      background: var(--color-main);
       color: black;
       transition: 0.2s;
     }
 
     .active {
       border-left: 4px solid var(--purple);
-      background: #7551f863;
+      background: var(--color-main-active);
     }
 
     .menu {

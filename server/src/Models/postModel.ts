@@ -1,15 +1,52 @@
 import { Schema, model } from 'mongoose';
-import IPost from '@Interfaces/IPost';
+import { IPosts } from '@Interfaces/IPosts';
 
-const postSchema = new Schema<IPost>(
+// Define the CommentSchema
+const commentSchema = new Schema(
   {
-    name: {
+    comment: {
       type: String,
-      required: [true, 'חובה להזין שם קטגוריה'],
-      trim: true,
-      maxlength: [40, 'שם לקוח צריך להיות קצר מ-40 תווים'],
-      minlength: [2, 'שם לקוח צריך להיות ארוך מ-2 תווים'],
+      required: [true, 'חובה להזין תוכן לתגובה'],
+      minlength: 2,
+      maxlength: 100,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'חובה להזין id לעורך הפוסט'],
+    },
+    createdAt: {
+      type: Date,
+      required: [true, 'חובה להזין id לעורך הפוסט'],
+      default: Date.now,
+    },
+  },
+  {
+    _id: true,
+  }
+);
+
+const postSchema = new Schema<IPosts>(
+  {
+    title: {
+      type: String,
+      required: [true, 'חובה להזין כותרת לפוסט'],
+      minlength: 2,
+      maxlength: 40,
+    },
+    photo: { type: String, default: 'default.jpg' },
+    authorId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'חובה להזין id לעורך הפוסט'],
+    },
+    content: {
+      type: String,
+      required: [true, 'חובה להזין תוכן לפוסט'],
+      minlength: 2,
+      maxlength: 500,
+    },
+    comments: [commentSchema],
   },
   {
     timestamps: true,
@@ -18,6 +55,6 @@ const postSchema = new Schema<IPost>(
   }
 );
 
-const Post = model<IPost>('Post', postSchema);
+const Post = model<IPosts>('Post', postSchema);
 
 export default Post;

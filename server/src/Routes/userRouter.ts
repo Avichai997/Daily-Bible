@@ -21,7 +21,7 @@ import {
   loginWithGgl,
   // sendConfirmEmail,
 } from '@Controllers/authController';
-import { uploadUserPhoto, resizeUserPhoto, setImageToField } from '@Middlewares/uploadImage';
+import { resizePhoto, setImageToField, uploadPhoto } from '@Middlewares/uploadImage';
 
 const router = express.Router();
 
@@ -38,7 +38,7 @@ router
   // Protect all this routes after this middleware. this routes is only for signed-in users.
   // .post('/confirmEmail', confirmEmail)
   .get('/me', getMe, getUser)
-  .patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe)
+  .patch('/updateMe', uploadPhoto, resizePhoto, updateMe)
   .patch('/updateMyPassword', updatePassword)
   .delete('/deleteMe', deleteMe)
   // Restrict all this routes to Admin only.
@@ -49,7 +49,7 @@ router.route('/').get(getAllUsers);
 router
   .route('/:id')
   .get(getUser)
-  .patch(uploadUserPhoto, resizeUserPhoto, setImageToField, updateUser)
+  .patch(uploadPhoto, resizePhoto, setImageToField, updateUser)
   .delete(deleteUser);
 
 export default router;

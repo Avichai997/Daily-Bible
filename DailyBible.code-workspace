@@ -18,6 +18,18 @@
             "commands": ["cd client", "npm set legacy-peer-deps true", "npm i", "npm run start:dev"]
           }
         ]
+      },
+      {
+        "splitTerminals": [
+          {
+            "name": "Lint server",
+            "commands": ["cd server", "npm set legacy-peer-deps true", "npm i", "npm run lint"]
+          },
+          {
+            "name": "Lint client",
+            "commands": ["cd client", "npm set legacy-peer-deps true", "npm i", "npm run lint"]
+          }
+        ]
       }
     ],
     "typescript.tsdk": "client/node_modules/typescript/lib",

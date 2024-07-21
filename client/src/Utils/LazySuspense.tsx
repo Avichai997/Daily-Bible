@@ -23,9 +23,13 @@ export default LazySuspense;
 export const ProjectStatusPage = LazySuspense(
   lazy(() => import('@Pages/ProjectStatus/ProjectStatus'))
 );
+export const PostEditFormPage = LazySuspense(
+  lazy(() => import('@Pages/PostEditForm/PostEditForm'))
+);
 export const LoginPage = LazySuspense(lazy(() => import('@Pages/Login/Login')));
 export const SignUpPage = LazySuspense(lazy(() => import('@Pages/Signup/Signup')));
 export const HomePage = LazySuspense(lazy(() => import('@Pages/Home/Home')));
+export const PostsPage = LazySuspense(lazy(() => import('@Pages/Posts/Posts')));
 export const ProfilePage = LazySuspense(lazy(() => import('@Pages/Profile/Profile')));
 export const WhyDailyBible = LazySuspense(lazy(() => import('@Pages/WhyDailyBible/WhyDailyBible')));
 export const UpdatePasswordPage = LazySuspense(

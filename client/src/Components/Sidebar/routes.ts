@@ -1,4 +1,4 @@
-import { House, Storage, AppRegistration, AccountCircle, Pattern, Info } from '@mui/icons-material';
+import { House, AppRegistration, AccountCircle, Pattern, Info, PostAdd } from '@mui/icons-material';
 import { SidebarRoutesArray } from './SidebarMenu';
 
 const routes: SidebarRoutesArray[] = [
@@ -6,6 +6,11 @@ const routes: SidebarRoutesArray[] = [
     path: '/', // default path
     name: 'בית',
     icon: House,
+  },
+  {
+    path: '/Posts',
+    name: 'דברי תורה',
+    icon: PostAdd,
   },
   {
     path: 'update',
@@ -28,11 +33,6 @@ const routes: SidebarRoutesArray[] = [
     path: 'WhyDailyBible',
     name: 'למה תנ"ך יומי',
     icon: Info,
-  },
-  {
-    path: 'Posts',
-    name: 'דברי תורה',
-    icon: Storage,
   },
 ];
 export default routes;

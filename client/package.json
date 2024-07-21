@@ -15,14 +15,14 @@
     "preview:dev": "vite preview --mode development",
     "preview:prod": "vite preview --mode production",
     "merge": "git pull && git pull origin Development && git merge Development",
-    "lint": "tsc && prettier --write --cache --log-level error . && cspell --cache --no-progress ../**/* && eslint --fix --cache .",
+    "lint": "tsc --noEmit && prettier --write --cache --log-level error --ignore-unknown . && cspell --cache --no-progress . && eslint --fix --cache .",
     "lint:parallel": "concurrently \"cd ../server && npm run lint\" \"npm run lint\""
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.17",
+    "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.17",
     "@tanstack/react-query": "^4.29.5",
     "@tanstack/react-query-devtools": "^4.29.6",
