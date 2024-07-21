@@ -3,6 +3,6 @@
 //   chapters: chaptersType;
 // };
 
-export type chapter = {book: string; chapter: string};
+export type Chapter = { book: string; chapter: string };
 
-export type studyDailyType = { chapter1: chapter; chapter2: chapter; chapter3: chapter };
+export type StudyDailyType = Record<'chapter1' | 'chapter2' | 'chapter3', Chapter>;
