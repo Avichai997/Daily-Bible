@@ -14,17 +14,10 @@ const router = express.Router();
 router
   .route('/')
   .get(getAllPostsHandler)
-  // .post(createPostHandler) //.post(protect, restrictTo('admin'), createPostHandler)
-  // .patch(bulkUpdatePostsHandler)
-  // .delete(deleteManyPostsHandler);
   .post(protect, uploadPhoto, resizePhoto, setImageToField, createPostHandler);
 
 router
   .route('/:id')
-  // .get(getPostHandler)
-  // .post(createPostHandler)
-  // .patch(updatePostHandler)
-  // .delete(deletePostHandler);
   .patch(protect, uploadPhoto, resizePhoto, setImageToField, updatePostHandler)
   .delete(protect, deletePostHandler);
 
