@@ -1,3 +1,7 @@
+.reactJewishDatePicker  {
+  margin: 0 !important;
+}
+
 .reactJewishDatePicker .navigation {
   height: 30px !important;
 }
@@ -8,4 +12,7 @@
 }
 .monthYearSelection {
   gap: 4px;
+}
+.reactJewishDatePicker .selectedDate {
+  border: none !important;
 }
