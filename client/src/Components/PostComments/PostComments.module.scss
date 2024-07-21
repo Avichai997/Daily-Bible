@@ -19,6 +19,13 @@
         flex: 1;
       }
     }
+
+    .commentActions {
+      display: flex;
+      align-content: flex-end;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
   }
 
   .addComment {

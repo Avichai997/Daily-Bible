@@ -86,8 +86,8 @@ const Post = ({ post }: PostProps) => {
         }
         action={
           isEditable ? (
-            <IconButton>
-              <Edit onClick={() => navigate(`/PostEditForm/${post.id}`)} />
+            <IconButton onClick={() => navigate(`/PostEditForm/${post.id}`)}>
+              <Edit />
             </IconButton>
           ) : (
             <></>
@@ -126,38 +126,6 @@ const Post = ({ post }: PostProps) => {
         {user && <PostComments post={post} />}
       </Collapse>
     </Card>
-
-    // <div className={classes.container}>
-    //   <div className={classes.title}>{post.title}</div>
-
-    //   {postUser && (
-    //     <div className={classes.user}>
-    //       <Avatar src={`${VITE_API_URL}/img/${USER_QUERY_KEY}/${postUser.photo}`} className={classes.avatar} />
-    //       <div className={classes.postDetails}>
-    //         <div className={classes.userName}>{`${postUser.firstName} ${postUser.lastName}`}</div>
-    //         <div className={classes.postTime}>{new Date(post.createdAt).toLocaleString()}</div>
-    //       </div>
-    //     </div>
-    //   )}
-
-    //   <div className={classes.content}>{post.content}</div>
-    //   <Button
-    //     variant='text'
-    //     className={classes.readMore}
-    //     onClick={() => navigate(`/PostEditForm/${post.id}`)}
-    //   >
-    //     להמשך קריאה
-    //   </Button>
-
-    //   {isEditable && (
-    //     <IconButton
-    //       className={classes.editPost}
-    //       onClick={() => navigate(`/PostEditForm/${post.id}`)}
-    //     >
-    //       <Edit />
-    //     </IconButton>
-    //   )}
-    // </div>
   );
 };
 

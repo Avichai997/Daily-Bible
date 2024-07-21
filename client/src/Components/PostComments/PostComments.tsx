@@ -123,10 +123,10 @@ const PostComments = ({ post }: PostCommentsProps) => {
               </div>
               {commentUser.id === user?.id && (
                 <div className={classes.commentActions}>
-                  <IconButton color='primary' onClick={() => handleEditComment(_id!, comment)}>
+                  <IconButton color='default' onClick={() => handleEditComment(_id!, comment)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton color='secondary' onClick={() => handleDeleteComment(_id!)}>
+                  <IconButton color='error' onClick={() => handleDeleteComment(_id!)}>
                     <DeleteIcon />
                   </IconButton>
                 </div>
