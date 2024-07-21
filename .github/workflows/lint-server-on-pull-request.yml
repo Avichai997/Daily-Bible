@@ -1,4 +1,4 @@
-name: Lint on PR
+name: Lint server on PR
 
 on:
   pull_request:
@@ -23,6 +23,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./server
+
+      - name: Install Client dependencies
+        run: npm install
+        working-directory: ./client
+
+      - name: 😍 Lint
+        run: npm run lint
         working-directory: ./server
 
       - name: Build production
