@@ -32,7 +32,6 @@ export const useDailyLessons = (date: Date) => {
     queryFn: () => getDailyLessons(date),
     initialData: {},
     staleTime: 0,
-    cacheTime: 0,
   });
 };
 
@@ -42,7 +41,6 @@ export const useBibleDailyLessonSource = (tref?: string) => {
     queryFn: () => getBibleDailyLessonSource(tref),
     initialData: [],
     staleTime: 0,
-    cacheTime: 0,
     enabled: !!tref,
   });
 };
@@ -85,7 +83,6 @@ export const useChapterSefaria = (book: string, chapter: string, enabled: boolea
     queryFn: () => getChapterSefaria(book, chapter),
     enabled,
     staleTime: 0,
-    cacheTime: 0,
     initialData: [],
   });
 };

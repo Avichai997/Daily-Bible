@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "cd .. && husky ./.husky",
     "start:dev": "vite --mode development",
-    "start:prod": "vite --mode prod",
+    "start:prod": "node --max-old-space-size=8192 vite --mode prod",
     "build:dev": "vite build --mode development",
     "build:prod": "vite build --mode production",
     "test:watch": "vitest",
