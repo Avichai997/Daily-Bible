@@ -1,4 +1,4 @@
-name: Lint on PR
+name: Lint client on PR
 
 on:
   pull_request:
