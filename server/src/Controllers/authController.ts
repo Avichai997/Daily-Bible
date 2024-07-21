@@ -289,7 +289,7 @@ export const updatePassword = catchAsync(async (req, res, next) => {
   if (!user) return next(new AppError('משתמש לא קיים', 404));
 
   // 2) Check if POSTed current password is correct
-  if (user.password && !user.correctPassword(req.body.currentPassword, user.password)) {
+  if (user.password && !(await user.correctPassword(req.body.currentPassword, user.password))) {
     return next(new AppError('הסיסמה שהוזנה שגויה.', StatusCodes.UNAUTHORIZED));
   }
 
