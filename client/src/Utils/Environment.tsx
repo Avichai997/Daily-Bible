@@ -8,6 +8,7 @@ export const {
   VITE_STATIC_KEY,
   VITE_MODULE_KEY,
   MODE,
+  VITE_GOOGLE_CLIENT_ID,
 } = import.meta.env;
 
 export const NODE_ENV = VITE_NODE_ENV || process.env.NODE_ENV || VITE_USER_NODE_ENV || MODE;

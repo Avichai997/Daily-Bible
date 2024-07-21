@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import { mixed, ref, string } from 'yup';
+import { date, number, mixed, ref, string } from 'yup';
 
 const phoneRegExp =
   /^(?:(?:(\+?972|\(\+?972\)|\+?\(972\))(?:\s|\.|-)?([1-9]\d?))|(0[5]{1}[01234578]))(?:\s|\.|-)?([^0\D]{1}\d{2}(?:\s|\.|-)?\d{4})$/gm;
@@ -49,3 +49,16 @@ export const yupPhotoUpload = mixed()
     // @ts-expect-error
     return !value || typeof value === 'string' || (value && SUPPORTED_FORMAT.includes(value.type));
   });
+
+export const yupTextValidation = (min = 1, max = Number.MAX_SAFE_INTEGER) =>
+  string()
+    .min(min, `This field must contain at least ${min} characters`)
+    .max(max, `This field cannot exceed ${max} characters`)
+    .required('* This field is required');
+export const yupNumberValidation = (min = 1, max = Number.MAX_SAFE_INTEGER) =>
+  number()
+    .min(min, `This field must be at least ${min}`)
+    .max(max, `This field cannot exceed ${max}`)
+    .required('* This field is required');
+export const yupRequiredValidation = string().required('* This field is required');
+export const yupDateValidation = date().required('* This field is required');

@@ -1,27 +1,20 @@
-import {
-  Avatar,
-  // Badge, IconButton, Tooltip
-} from '@mui/material';
+import { Avatar } from '@mui/material';
 import UploadFile from '@Components/UploadFile/UploadFile';
 import { FormikErrors } from 'formik';
 import UploadImage from './UploadImage';
-// import { PhotoCamera, Delete } from '@mui/icons-material';
 
-export interface IUpdateProfile {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FormikValues<T> = T & {
   photo: File | string;
-}
+};
 
 interface IProfile {
   setFieldValue: (
     field: string,
     value: unknown,
     shouldValidate?: boolean | undefined
-  ) => Promise<void | FormikErrors<IUpdateProfile>>;
-  values: IUpdateProfile;
+  ) => Promise<void | FormikErrors<FormikValues<unknown>>>;
+  values: FormikValues<unknown>;
   errors: boolean | '' | undefined;
   helperText: JSX.Element;
   apiUrl?: string | undefined;

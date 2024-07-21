@@ -21,7 +21,12 @@ module.exports = {
     'plugin:@cspell/recommended',
   ],
   plugins: ['react', 'react-hooks', '@typescript-eslint', '@tanstack/query', 'prettier'],
-  ignorePatterns: ['build*', 'src/Assets'],
+  ignorePatterns: [
+    'build*',
+    'src/Assets',
+    'ecosystem.config.js',
+    'src/Components/Spotify/utils/studyBoard.xlsx',
+  ],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -31,6 +36,7 @@ module.exports = {
     project: 'tsconfig.json',
   },
   rules: {
+    'no-warning-comments': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     radix: 'off',
     'react/button-has-type': 'off',
@@ -69,10 +75,7 @@ module.exports = {
     'jsx-a11y/rule-name': 'off',
     'jsx-a11y/alt-text': 'off',
     '@typescript-eslint/dot-notation': 'off',
-    '@cspell/spellchecker': [
-      'error',
-      { checkComments: true, autoFix: true, cspell: { import: ['../cspell.json'] } },
-    ],
+    '@cspell/spellchecker': ['error', { checkComments: true, autoFix: true }],
     '@typescript-eslint/no-unused-vars': 'error',
     'import/no-extraneous-dependencies': [
       'error',
@@ -94,7 +97,6 @@ module.exports = {
     'linebreak-style': 'off',
     'no-console': 'error',
     'no-trailing-spaces': 'off',
-    'no-warning-comments': 'error',
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'padding-line-between-statements': [

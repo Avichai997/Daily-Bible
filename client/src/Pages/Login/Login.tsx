@@ -18,6 +18,17 @@ import PasswordInput from '@Components/PasswordInput';
 import { useAuth } from '@ApiService/Requests/useAuth';
 import FormikInput from '@Components/FormikInput/FormikInput';
 import { ILoginRequest } from '@ApiService/Interfaces/IUser';
+import { useCallback, useEffect } from 'react';
+import { VITE_GOOGLE_CLIENT_ID } from '@Utils/Environment';
+import { jwtDecode } from 'jwt-decode';
+
+interface IGoogleCredentialResponse {
+  credential: string;
+}
+
+interface IDecodedToken {
+  email: string;
+}
 
 const Login = () => {
   const { loginUser } = useAuth();
@@ -31,6 +42,39 @@ const Login = () => {
     email: yupEmail,
     password: yupPassword,
   });
+
+  const handleCallbackResponse = useCallback(
+    (response: IGoogleCredentialResponse) => {
+      const decodedToken = jwtDecode<IDecodedToken>(response.credential);
+      loginUser(
+        {
+          email: decodedToken.email,
+          password: response.credential,
+        },
+        'loginWithGgl'
+      );
+    },
+    [loginUser]
+  );
+
+  // init google, run once.
+  useEffect(() => {
+    /* global google */
+    // @ts-ignore
+    google.accounts.id.initialize({
+      client_id: VITE_GOOGLE_CLIENT_ID,
+      callback: handleCallbackResponse,
+    });
+
+    // @ts-ignore
+    google.accounts.id.renderButton(document.getElementById('signInWithGgl'), {
+      theme: 'outline',
+      size: 'large',
+    });
+
+    // @ts-ignore
+    google.accounts.id.prompt();
+  }, [handleCallbackResponse]);
 
   const onSubmit = (values: ILoginRequest) => loginUser(values);
 
@@ -85,6 +129,7 @@ const Login = () => {
                 >
                   התחבר
                 </Button>
+                <div id='signInWithGgl' style={{ display: 'flex', justifyContent: 'center' }} />
                 <Grid container justifyContent='space-between'>
                   <Grid>
                     <Button href='/ForgotPassword' variant='text'>

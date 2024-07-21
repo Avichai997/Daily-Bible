@@ -14,6 +14,8 @@ export interface IFormikInput {
   autoComplete: string;
   style?: SxProps;
   disabled?: boolean;
+  multiline?: boolean;
+  rows?: number;
 }
 
 const FormikInput = ({
@@ -28,6 +30,8 @@ const FormikInput = ({
   autoComplete,
   style,
   disabled = false,
+  multiline = false,
+  rows = 1,
 }: IFormikInput) => {
   return (
     <Field
@@ -46,6 +50,8 @@ const FormikInput = ({
       autoFocus={autoFocus}
       style={style}
       disabled={!!disabled}
+      multiline={multiline}
+      rows={rows}
     />
   );
 };

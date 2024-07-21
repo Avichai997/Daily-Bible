@@ -47,8 +47,8 @@ app.use(hppMiddleware);
 // 2) ROUTES
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
-app.get('/api/health', (_req, res) => res.status(StatusCodes.OK).json(`Server is healthy`));
 
+app.get('/api/health', (_req, res) => res.status(StatusCodes.OK).json(`Server is healthy`));
 app.all('*', (req, _res, next) =>
   next(new AppError(`הכתובת ${req.originalUrl} לא קיימת בשרת!`, StatusCodes.NOT_FOUND))
 );

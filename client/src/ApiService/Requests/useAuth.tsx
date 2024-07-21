@@ -33,12 +33,13 @@ export const useGetAllUsers = (options?: QueryOptions<IUser[]>) => {
 };
 
 export const useGetUser = (id: string, options?: QueryOptions<IUser>) => {
-  const { data: User, ...queryInfo } = useQuery<IUser>({
+  const { data: user, ...queryInfo } = useQuery<IUser>({
     queryKey: [`${USER_QUERY_KEY}/${id}`],
+    enabled: !!id,
     ...options,
   });
 
-  return { User, ...queryInfo };
+  return { user, ...queryInfo };
 };
 
 export const useAuth = () => {
@@ -146,12 +147,13 @@ export const useAuth = () => {
 
   const loginUser = (
     data: ILoginRequest,
+    path: string = 'login',
     options?: UseMutationOptions<ILoginSignupResponse, unknown, IMutation<ILoginRequest>>
   ) => {
     LoginUser(
       {
         method: 'Post',
-        path: `${USER_QUERY_KEY}/login`,
+        path: `${USER_QUERY_KEY}/${path}`,
         data,
       },
       {

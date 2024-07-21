@@ -4,7 +4,6 @@ import Navbar from '@Components/Navbar';
 import './Home.scss';
 import { useState } from 'react';
 import Sidebar from '@Components/Sidebar/Sidebar';
-// import SpotifyEmbed from '@Components/Spotfy/Spotify';
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

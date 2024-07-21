@@ -93,6 +93,9 @@ button:disabled {
     var(--color-white) -56.42%,
     var(--color-green) 56.42%
   );
+  // --color-main: #7551f8b0;
+  --color-main: rgb(250, 188, 134);
+  --color-main-active: sandybrown;
 }
 html,
 body {
@@ -137,7 +140,7 @@ a {
 [1200 - 1800] is where our normal styles apply
 1800px + :      Big desktop
 
-$breakpoint arguement choices:
+$breakpoint argument choices:
 - phone
 - tab-port
 - tab-land

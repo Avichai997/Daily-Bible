@@ -13,6 +13,8 @@ import {
   UpdatePasswordPage,
   ErrorFallback,
   WhyDailyBible,
+  PostEditFormPage,
+  PostsPage,
 } from '@Utils/LazySuspense';
 import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
 
@@ -24,20 +26,44 @@ const App = () => {
       <Routes>
         <Route path='/Login' element={<LoginPage />} />
         <Route path='/SignUp' element={<SignUpPage />} />
-        <Route
-          path='/'
-          element={
-            <ProtectRoute>
-              <HomePage />
-            </ProtectRoute>
-          }
-        >
-          <Route index element={<LessonContainer />} />
-          <Route path='/Profile' element={<ProfilePage />} />
-          <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
-          <Route path='/UpdatePassword' element={<UpdatePasswordPage />} />
-        </Route>
 
+        <Route path='/' element={<HomePage />}>
+          <Route index element={<LessonContainer />} />
+          <Route path='/Posts/' element={<PostsPage />} />
+          <Route
+            path='/PostEditForm'
+            element={
+              <ProtectRoute>
+                <PostEditFormPage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path='/PostEditForm/:postId'
+            element={
+              <ProtectRoute>
+                <PostEditFormPage />
+              </ProtectRoute>
+            }
+          />
+          <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
+          <Route
+            path='/Profile'
+            element={
+              <ProtectRoute>
+                <ProfilePage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path='/UpdatePassword'
+            element={
+              <ProtectRoute>
+                <UpdatePasswordPage />
+              </ProtectRoute>
+            }
+          />
+        </Route>
         <Route path='/ProjectStatus' element={<ProjectStatusPage />} />
         <Route path='*' element={<NoMatch404Page />} />
       </Routes>

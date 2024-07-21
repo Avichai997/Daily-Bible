@@ -15,6 +15,7 @@ import {
   JWT_SECRET,
   // CLIENT_URL
 } from '@Utils/environment';
+import isJwtValid from '@Utils/jti';
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -144,6 +145,34 @@ export const login = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, reset the rate limiter for login route and send token to client
+  loginLimiter.resetKey(req.ip);
+  createSendToken(user, StatusCodes.OK, req, res);
+});
+
+export const loginWithGgl = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // 1) Check if google validation valid
+  if (!isJwtValid(password, email))
+    return next(new AppError('יש להזדהות דרך google או לשלוח שם משתמש וסיסמא תקינים.', 400));
+
+  // 2) Check if email and password exist
+  if (!email) return next(new AppError('כתובת מייל או סיסמה חסרים! יש לנסות שוב מחדש.', 400));
+
+  if (!req.ip) return next(new AppError('אין כתובת IP למשתמש!', 400));
+
+  // 3) Check if user exists && password is correct
+  const user = await User.findOne({ email }).select('+password');
+  if (!user) {
+    return next(
+      new AppError(
+        `כתובת המייל שהוזנה לא קיימת במערכת! נותרו עוד ${req.rateLimit.remaining} נסיונות להתחברות`,
+        StatusCodes.UNAUTHORIZED
+      )
+    );
+  }
+
+  // 4) If everything ok, reset the rate limiter for login route and send token to client
   loginLimiter.resetKey(req.ip);
   createSendToken(user, StatusCodes.OK, req, res);
 });

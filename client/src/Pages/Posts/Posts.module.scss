@@ -1,0 +1,16 @@
+.postsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  .addPostBtn {
+    background-color: var(--color-main) !important;
+    color: white;
+    border-radius: 6px;
+    &:hover {
+      background-color: var(--color-main-active) !important;
+    }
+  }
+}

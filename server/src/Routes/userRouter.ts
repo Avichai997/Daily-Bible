@@ -16,8 +16,10 @@ import {
   updatePassword,
   logout,
   restrictTo,
+  loginWithGgl,
+  // sendConfirmEmail,
 } from '@Controllers/authController';
-import { uploadUserPhoto, resizeUserPhoto } from '@Middlewares/uploadImage';
+import { resizePhoto, uploadPhoto } from '@Middlewares/uploadImage';
 
 const router = express.Router();
 
@@ -74,6 +76,7 @@ router.post('/signup', signup);
  *         description: User logged in
  */
 router.post('/login', login);
+router.post('/loginWithGgl', loginWithGgl);
 
 /**
  * @openapi
@@ -163,7 +166,7 @@ router.get('/me', getMe, getUser);
  *       200:
  *         description: User updated successfully
  */
-router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
+router.patch('/updateMe', uploadPhoto, resizePhoto, updateMe);
 
 /**
  * @openapi
@@ -274,7 +277,7 @@ router
    *       200:
    *         description: User updated
    */
-  .patch(uploadUserPhoto, resizeUserPhoto, updateUser)
+  .patch(uploadPhoto, resizePhoto, updateUser)
   /**
    * @openapi
    * /users/{id}:
