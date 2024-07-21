@@ -5,7 +5,7 @@ export interface IUsers {
   isModified(arg0: string): unknown;
   createPasswordResetToken(): string;
   changedPasswordAfter(iat: number | undefined): boolean;
-  correctPassword(candidatePassword: string, userPassword: string): boolean;
+  correctPassword(candidatePassword: string, userPassword: string): Promise<boolean>;
   createEmailConfirmToken(): string;
 
   _id: string | ObjectId;

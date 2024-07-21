@@ -39,5 +39,6 @@ jobs:
             cd Daily-Bible
             git reset --hard origin/main
             cd client
+            npm install
             pm2 startOrRestart ecosystem.config.cjs --only client || pm2 start ecosystem.config.cjs --only client
           EOF

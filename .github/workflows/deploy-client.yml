@@ -31,7 +31,6 @@ jobs:
             rm -rf node_modules
             npm cache clean --force
             npm install
-            npm install
             npm run build:prod
             pm2 startOrRestart ecosystem.config.cjs --only client || pm2 start ecosystem.config.cjs --only client
           EOF
