@@ -18,6 +18,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/bibleKey.pem
           chmod 600 ~/.ssh/bibleKey.pem
+          ssh-keyscan -H ec2-13-50-54-221.eu-north-1.compute.amazonaws.com >> ~/.ssh/known_hosts
 
       - name: Install dependencies and build client
         run: |
