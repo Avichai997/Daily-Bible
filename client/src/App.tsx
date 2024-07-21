@@ -14,10 +14,9 @@ import {
   ErrorFallback,
   WhyDailyBible,
   PostEditFormPage,
+  PostsPage,
 } from '@Utils/LazySuspense';
 import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
-import EditPost from '@Pages/EditPost/EditPost';
-import Posts from '@Pages/Posts/Posts';
 
 const App = () => {
   useUser();
@@ -30,12 +29,24 @@ const App = () => {
 
         <Route path='/' element={<HomePage />}>
           <Route index element={<LessonContainer />} />
-          <Route path='/Posts/' element={<Posts />} />
-          <Route path='/PostEditForm' element={<PostEditFormPage />} />
-          <Route path='/PostEditForm/:postId' element={<PostEditFormPage />} />
+          <Route path='/Posts/' element={<PostsPage />} />
+          <Route
+            path='/PostEditForm'
+            element={
+              <ProtectRoute>
+                <PostEditFormPage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path='/PostEditForm/:postId'
+            element={
+              <ProtectRoute>
+                <PostEditFormPage />
+              </ProtectRoute>
+            }
+          />
           <Route path='/WhyDailyBible' element={<WhyDailyBible />} />
-          <Route path='/editPost' element={<EditPost />} />
-          <Route path='/editPost/:postId' element={<EditPost />} />
           <Route
             path='/Profile'
             element={

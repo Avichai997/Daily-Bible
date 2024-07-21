@@ -12,7 +12,10 @@ import Post from '@Models/postModel';
 import { Request } from 'express';
 
 export const getAllPostsService = (req: Request) => {
-  const posts = getAll(Post, req);
+  const posts = getAll(Post, req, {
+    path: 'authorId',
+    select: 'photo firstName lastName _id',
+  });
 
   return posts;
 };

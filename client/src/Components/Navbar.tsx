@@ -16,6 +16,7 @@ import { useAuth } from '@ApiService/Requests/useAuth';
 import { IconButton, Tooltip } from '@mui/material';
 import { MuiIcon, ReactSetState } from '@CommonInterfaces';
 import NotificationCenter from './NotificationCenter/NotificationCenter';
+import { VITE_API_URL } from '@Utils/Environment';
 
 type NavProp = {
   icon?: MuiIcon;
@@ -75,7 +76,7 @@ const Navbar = ({ setIsOpen, isOpen }: INavbar) => {
           <Dropdown
             items={userMenuItems}
             alt={user?.name || ''}
-            avatarImageSrc={`${import.meta.env.VITE_API_URL}/img/users/${user?.photo}`}
+            avatarImageSrc={`${VITE_API_URL}/img/users/${user?.photo}`}
           />
         </div>
       </div>

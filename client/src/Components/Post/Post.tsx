@@ -1,56 +1,53 @@
-// import axios from 'axios';
-// import { useNavigate, useParams } from 'react-router-dom';
-// import { useGetAllPosts } from '@ApiService/Requests/usePosts';
-// import { useUser } from '@ApiService/Requests/useUser';
-// import PostComments from '../PostComments/PostComments';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '@ApiService/Requests/useUser';
+import { IUserPost } from '@ApiService/Interfaces/IPost';
+import { VITE_API_URL } from '@Utils/Environment';
+import { Avatar, Button, IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import classes from './Post.module.scss';
 
-// const Post = () => {
-//   const { user } = useUser();
-//   const params = useParams();
-//   const postId = params?.postId;
+type PostProps = {
+  post: IUserPost;
+};
+const Post = ({ post }: PostProps) => {
+  const { user } = useUser();
+  const navigate = useNavigate();
+  const postUser = post?.authorId;
+  const isEditable = user?.id === postUser?.id;
 
-//   const { posts } = useGetAllPosts();
-//   const post = posts?.find((post) => post.id === postId);
+  return (
+    <div className={classes.container}>
+      <div className={classes.title}>{post.title}</div>
 
-//   if (!post) return <>No post found</>;
+      {postUser && (
+        <div className={classes.user}>
+          <Avatar src={`${VITE_API_URL}/img/users/${postUser.photo}`} className={classes.avatar} />
+          <div className={classes.postDetails}>
+            <div className={classes.userName}>{`${postUser.firstName} ${postUser.lastName}`}</div>
+            <div className={classes.postTime}>{new Date(post.createdAt).toLocaleString()}</div>
+          </div>
+        </div>
+      )}
 
-//   const { id, title, content, authorId, photo, comments } = post;
+      <div className={classes.content}>{post.content}</div>
+      <Button
+        variant='text'
+        className={classes.readMore}
+        onClick={() => navigate(`/PostEditForm/${post.id}`)}
+      >
+        להמשך קריאה
+      </Button>
 
-//   const navigate = useNavigate();
-//   const onDeleteClick = async () => {
-//     try {
-//       await axios.delete(`http://localhost:5000/posts/${post._id}`);
-//     } catch (error) {
-//       alert('Error deleting post');
-//     }
-//     alert('Post deleted');
-//     navigate(-1);
-//   };
+      {isEditable && (
+        <IconButton
+          className={classes.editPost}
+          onClick={() => navigate(`/PostEditForm/${post.id}`)}
+        >
+          <EditIcon />
+        </IconButton>
+      )}
+    </div>
+  );
+};
 
-//   return (
-//     <div className='post'>
-//       <button onClick={() => navigate(-1)}>חזור</button>
-//       <h1>{title}</h1>
-//       <p>{content}</p>
-//       <img style={{ maxWidth: '300px' }} src={photo} />
-
-//       {user?.id === authorId ? (
-//         <>
-//           <button
-//             onClick={() => {
-//               navigate(`/editpost/${id}`);
-//             }}
-//           >
-//             עריכה
-//           </button>
-//           <button onClick={onDeleteClick}>מחיקה</button>
-//         </>
-//       ) : (
-//         <></>
-//       )}
-//       <PostComments comments={comments} />
-//     </div>
-//   );
-// };
-
-// export default Post;
+export default Post;

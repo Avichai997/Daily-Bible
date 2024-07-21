@@ -1,14 +1,7 @@
-.box {
-  margin-top: 8px;
+.postsContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-
-  .profileForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
+  flex-direction: column;
+  gap: 20px;
 }

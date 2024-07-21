@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useGetAllPosts } from '@ApiService/Requests/usePosts';
+import Post from '@Components/Post/Post';
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -8,14 +9,7 @@ const PostList = () => {
   return (
     <div>
       {posts?.map((post) => (
-        <div
-          key={post.id}
-          // onClick={() => navigate(`/posts/${post.id}`)}
-          onClick={() => navigate(`/PostEditForm/${post.id}`)}
-          style={{ cursor: 'pointer' }}
-        >
-          {post.title}
-        </div>
+        <Post key={post.id} onClick={() => navigate(`/PostEditForm/${post.id}`)} post={post} />
       ))}
     </div>
   );

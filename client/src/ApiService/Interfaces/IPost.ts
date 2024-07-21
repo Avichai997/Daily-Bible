@@ -1,6 +1,8 @@
+import { IUser } from './IUser';
+
 export interface IPost {
   id?: string;
-  authorId?: string;
+  authorId?: Partial<IUser>;
   title: string;
   content: string;
   photo: string;
@@ -9,6 +11,12 @@ export interface IPost {
     user: string;
   }[];
   imageFieldName?: 'photo';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IUserPost extends IPost {
+  authorId?: Pick<IUser, '_id' | 'id' | 'firstName' | 'lastName' | 'photo'>;
 }
 
 export type PostFormValues = Pick<IPost, 'authorId' | 'title' | 'content' | 'photo'>;
