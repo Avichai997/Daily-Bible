@@ -14,11 +14,11 @@ import { Request } from 'express';
 const populateAuthorOptions = [
   {
     path: 'authorId',
-    select: 'photo firstName lastName _id',
+    select: 'photo firstName lastName id _id',
   },
   {
     path: 'comments.user',
-    select: 'photo firstName lastName _id',
+    select: 'photo firstName lastName id _id',
   },
 ];
 

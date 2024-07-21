@@ -3,12 +3,15 @@ import { IUser } from './IUser';
 type PopulatedUser = Pick<IUser, '_id' | 'id' | 'firstName' | 'lastName' | 'photo'>;
 
 export type PostComment = {
+  id?: string;
+  _id?: string;
   comment: string;
   user: PopulatedUser | string;
   createdAt: string;
 };
 export interface IPost {
   id?: string;
+  _id: string;
   authorId: PopulatedUser;
   title: string;
   content: string;

@@ -1,9 +1,30 @@
-/* eslint-disable func-names */
 import { Schema, model } from 'mongoose';
-// import AppError from '@Utils/AppError';
-import { /* currentPost, */ IPosts } from '@Interfaces/IPosts';
-// import { TEN_MINUTES } from '@Utils/commonConstants';
-// import { StatusCodes } from 'http-status-codes';
+import { IPosts } from '@Interfaces/IPosts';
+
+// Define the CommentSchema
+const commentSchema = new Schema(
+  {
+    comment: {
+      type: String,
+      required: [true, 'חובה להזין תוכן לתגובה'],
+      minlength: 2,
+      maxlength: 100,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'חובה להזין id לעורך הפוסט'],
+    },
+    createdAt: {
+      type: Date,
+      required: [true, 'חובה להזין id לעורך הפוסט'],
+      default: Date.now,
+    },
+  },
+  {
+    _id: true,
+  }
+);
 
 const postSchema = new Schema<IPosts>(
   {
@@ -25,25 +46,7 @@ const postSchema = new Schema<IPosts>(
       minlength: 2,
       maxlength: 500,
     },
-    comments: [
-      {
-        comment: {
-          type: String,
-          required: [true, 'חובה להזין תוכן לתגובה'],
-          minlength: 2,
-          maxlength: 100,
-        },
-        user: {
-          type: Schema.Types.ObjectId,
-          ref: 'User',
-          required: [true, 'חובה להזין id לעורך הפוסט'],
-        },
-        createdAt: {
-          type: Date,
-          required: [true, 'חובה להזין id לעורך הפוסט'],
-        },
-      },
-    ],
+    comments: [commentSchema],
   },
   {
     timestamps: true,
@@ -51,13 +54,6 @@ const postSchema = new Schema<IPosts>(
     toObject: { virtuals: true },
   }
 );
-
-postSchema.virtual<IPosts>('posts', {
-  //
-  //
-  //
-  //
-});
 
 const Post = model<IPosts>('Post', postSchema);
 
