@@ -2,7 +2,7 @@ import { IUser } from './IUser';
 
 export interface IPost {
   id?: string;
-  authorId?: Partial<IUser>;
+  authorId: Pick<IUser, '_id' | 'id' | 'firstName' | 'lastName' | 'photo'>;
   title: string;
   content: string;
   photo: string;
@@ -13,10 +13,6 @@ export interface IPost {
   imageFieldName?: 'photo';
   createdAt: string;
   updatedAt: string;
-}
-
-export interface IUserPost extends IPost {
-  authorId?: Pick<IUser, '_id' | 'id' | 'firstName' | 'lastName' | 'photo'>;
 }
 
 export type PostFormValues = Pick<IPost, 'authorId' | 'title' | 'content' | 'photo'>;

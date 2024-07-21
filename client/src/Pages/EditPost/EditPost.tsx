@@ -16,7 +16,7 @@
 
 //   // const [post, setPost] = useState<IPost>();
 //   const [photoPreviewUrl, setPhotoPreviewUrl] = useState('');
-//   const [photo, setPhoto] = useState(''); // '../server/public/img/users/default.jpg'
+//   const [photo, setPhoto] = useState(''); // '../server/public/img/${USER_QUERY_KEY}/default.jpg'
 //   const authorId = '6681306d4cd70a8f3428ddf2'; // useContext(UserContext).user._id;
 
 //   useEffect(() => {

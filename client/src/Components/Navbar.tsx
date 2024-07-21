@@ -15,8 +15,9 @@ import Dropdown from '@Components/Dropdown';
 import { useAuth } from '@ApiService/Requests/useAuth';
 import { IconButton, Tooltip } from '@mui/material';
 import { MuiIcon, ReactSetState } from '@CommonInterfaces';
-import NotificationCenter from './NotificationCenter/NotificationCenter';
 import { VITE_API_URL } from '@Utils/Environment';
+import { USER_QUERY_KEY } from '@CommonConstants';
+import NotificationCenter from './NotificationCenter/NotificationCenter';
 
 type NavProp = {
   icon?: MuiIcon;
@@ -76,7 +77,7 @@ const Navbar = ({ setIsOpen, isOpen }: INavbar) => {
           <Dropdown
             items={userMenuItems}
             alt={user?.name || ''}
-            avatarImageSrc={`${VITE_API_URL}/img/users/${user?.photo}`}
+            avatarImageSrc={`${VITE_API_URL}/img/${USER_QUERY_KEY}/${user?.photo}`}
           />
         </div>
       </div>

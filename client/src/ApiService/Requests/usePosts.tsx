@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ICreatePostRequest, IPost, IUserPost } from '@Interfaces/IPost';
+import { ICreatePostRequest, IPost } from '@Interfaces/IPost';
 import { IMutation, QueryOptions } from '@CommonInterfaces';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -10,8 +10,8 @@ import {
 import { POSTS_QUERY_KEY } from '@CommonConstants';
 import { ToastSuccess } from '@Components/Toastify/Toasts';
 
-export const useGetAllPosts = (options?: QueryOptions<IUserPost[]>) => {
-  const { data: posts, ...queryInfo } = useQuery<IUserPost[]>({
+export const useGetAllPosts = (options?: QueryOptions<IPost[]>) => {
+  const { data: posts, ...queryInfo } = useQuery<IPost[]>({
     queryKey: [POSTS_QUERY_KEY],
     ...options,
   });

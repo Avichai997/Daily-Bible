@@ -1,38 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { IPost } from '@ApiService/Interfaces/IPost';
+import { useUser } from '@ApiService/Requests/useUser';
 
-export interface IPostComments {
-  comments: IPost['comments'];
-}
-
-const PostComments = ({ comments: initialComments }: IPostComments) => {
+const PostComments = (post: IPost) => {
   const [showTextbox, setShowTextbox] = useState(false);
   const [newComment, setNewComment] = useState('');
-  // const location = useLocation();
-  // interface ILocationState {
-  //   comments: Array<{ user: string; comment: string }>;
-  // }
-  // const comments = (location.state as ILocationState)?.comments ?? [];
-  const comments = initialComments;
-  const params = useParams();
-  const { postId } = params;
+  const { comments } = post;
   const handleAddCommentClick = () => {
     setShowTextbox(!showTextbox);
   };
   const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewComment(e.target.value);
   };
+  const { user } = useUser();
 
   // Placeholder for the actual save function
   const saveCommentToDatabase = async (comment: string) => {
-    const user = 'User'; // get user from context
     try {
-      const newComment = { comment, user };
+      const newComment = { comment, user: user?.id };
 
       const response = await axios.patch(
-        `http://localhost:5000/posts/${postId}/comments/`,
+        `http://localhost:5000/posts/${post?.id || post?._id}/comments/`,
         { comments: [...comments, newComment] }, // Spread the existing comments and add the new one
 
         {
@@ -42,10 +32,7 @@ const PostComments = ({ comments: initialComments }: IPostComments) => {
         }
       );
       comments.push(newComment);
-      console.log('Comment saved successfully:', response.data);
-    } catch (error) {
-      console.error('Error saving comment:', error);
-    }
+    } catch (error) {}
   };
 
   const handleSaveComment = async () => {

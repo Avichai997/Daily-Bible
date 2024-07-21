@@ -28,7 +28,13 @@ const PostEditForm = () => {
   const { updatePost, createPost, deletePost } = usePostCRUD();
 
   const initialValues: PostValues = {
-    authorId: user?.id,
+    authorId: {
+      _id: user?.id || '',
+      id: user?.id || '',
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      photo: user?.photo || '',
+    },
     title: post?.title || '',
     content: post?.content || '',
     photo: post?.photo || 'default.jpg',
@@ -137,7 +143,7 @@ const PostEditForm = () => {
                       disabled={formik.isSubmitting}
                       onClick={() => navigate('/Posts')}
                     >
-                      ביטול
+                      {formik.dirty ? 'ביטול' : 'חזור'}
                     </Button>
                   </Stack>
 

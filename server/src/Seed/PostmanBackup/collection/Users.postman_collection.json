@@ -136,7 +136,7 @@
             {
               "key": "photo",
               "type": "file",
-              "src": "/C:/Users/Avichai Iluz/Downloads/Shual Dashboards System/server/public/img/users/user-63bc1d7337538b0773d1fb65-1673517624582.jpeg",
+              "src": "/C:/Users/Avichai Iluz/Downloads/Shual Dashboards System/server/public/img/${USER_QUERY_KEY}/user-63bc1d7337538b0773d1fb65-1673517624582.jpeg",
               "disabled": true
             }
           ]
@@ -201,7 +201,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/img/users/default.jpg",
+          "raw": "http://localhost:5000/img/${USER_QUERY_KEY}/default.jpg",
           "protocol": "http",
           "host": ["localhost"],
           "port": "5000",
