@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useChapterSefaria } from '@ApiService/Requests/useDailySource';
-import SpotifyEmbed from '@Components/Spotfy/Spotify';
+import SpotifyEmbed from '@Components/Spotify/Spotify';
 import { FC, useCallback, useState } from 'react';
-import { getGematria } from '@Components/Spotfy/utils/searchDay';
+import { getGematria } from '@Components/Spotify/utils/searchDay';
 import { Button } from '@mui/material';
 import { isDateToday } from '@Utils/Day';
 import { ReactJewishDatePicker } from 'react-jewish-datepicker';

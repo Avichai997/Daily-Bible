@@ -2,27 +2,25 @@ import express from 'express';
 import {
   getAllPostsHandler,
   createPostHandler,
-  bulkUpdatePostsHandler,
-  deleteManyPostsHandler,
   getPostHandler,
   updatePostHandler,
   deletePostHandler,
 } from '@Controllers/postController';
-import { protect, restrictTo } from '@Controllers/authController';
+import { protect } from '@Controllers/authController';
+import { resizePhoto, setImageToField, uploadPhoto } from '@Middlewares/uploadImage';
 
 const router = express.Router();
 
 router
   .route('/')
   .get(getAllPostsHandler)
-  .post(protect, restrictTo('admin'), createPostHandler)
-  .patch(protect, restrictTo('admin'), bulkUpdatePostsHandler)
-  .delete(protect, restrictTo('admin'), deleteManyPostsHandler);
+  .post(protect, uploadPhoto, resizePhoto, setImageToField, createPostHandler);
 
 router
   .route('/:id')
-  .get(getPostHandler)
-  .patch(protect, restrictTo('admin'), updatePostHandler)
-  .delete(protect, restrictTo('admin'), deletePostHandler);
+  .patch(protect, uploadPhoto, resizePhoto, setImageToField, updatePostHandler)
+  .delete(protect, deletePostHandler);
+
+router.route('/:id/comments').get(getPostHandler).patch(updatePostHandler);
 
 export default router;

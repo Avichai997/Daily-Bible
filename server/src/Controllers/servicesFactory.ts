@@ -6,12 +6,6 @@ import AppError from '@Utils/AppError';
 import APIFeatures from '@Utils/ApiFeatures';
 import { StatusCodes } from 'http-status-codes';
 
-export const createOne = async <T>(Model: Model<T>, req: any) => {
-  const doc: T = await Model.create(req.body);
-
-  return doc;
-};
-
 export const getAll = async <T>(
   Model: Model<T>,
   req: Request,
@@ -45,17 +39,39 @@ export const getOne = async <T>(
   return doc;
 };
 
-export const updateOne = async <T>(Model: Model<T>, req: Request) => {
+export const createOne = async <T>(
+  Model: Model<T>,
+  req: any,
+  populateOptions?: IPopulateOptions
+) => {
+  let doc: T = await Model.create(req.body);
+
+  if (populateOptions) {
+    doc = await getOne(Model, req, populateOptions);
+  }
+
+  return doc;
+};
+
+export const updateOne = async <T>(
+  Model: Model<T>,
+  req: Request,
+  populateOptions?: IPopulateOptions
+) => {
   delete req.body._id;
   delete req.body.id;
 
   const document = await Model.findById(req.params.id);
   if (!document) throw new AppError('Record not found', StatusCodes.NOT_FOUND);
 
-  const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+  let query = Model.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+
+  if (populateOptions) query = query.populate(populateOptions);
+
+  const doc = await query;
 
   return doc;
 };

@@ -28,6 +28,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": [".", "../.eslintrc.cjs"],
+  "include": [".", "../.eslintrc.cjs", "../client/src/ApiService/apiClient.ts"],
   "exclude": ["node_modules", "build*/", "dist*/", "Seed/PostmanBackup", "ecosystem.config.js"]
 }
