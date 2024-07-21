@@ -5,7 +5,7 @@ import xss from 'xss-clean';
 import cors, { CorsOptions } from 'cors';
 import { ONE_HOUR } from '@Utils/commonConstants';
 import AppError from '@Utils/AppError';
-import { CLIENT_URL, NODE_ENV } from '@Utils/environment';
+import { CLIENT_URL, NODE_ENV, PORT } from '@Utils/environment';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 import csrf from 'csurf';
@@ -19,7 +19,7 @@ const helmetMiddleware = helmet({
 });
 
 // CORS
-const whitelist = [CLIENT_URL];
+const whitelist = [CLIENT_URL, `http://localhost:${PORT}`];
 const corsOptions: CorsOptions = {
   credentials: true, // allow cookies
   origin: (origin, callback) => {
