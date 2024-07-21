@@ -17,7 +17,7 @@ const postSchema = new Schema<IPosts>(
     authorId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'חובה להזין מחבר לפוסט'],
+      required: [true, 'חובה להזין id לעורך הפוסט'],
     },
     content: {
       type: String,
@@ -34,8 +34,13 @@ const postSchema = new Schema<IPosts>(
           maxlength: 100,
         },
         user: {
-          type: String,
-          required: [true],
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          required: [true, 'חובה להזין id לעורך הפוסט'],
+        },
+        createdAt: {
+          type: Date,
+          required: [true, 'חובה להזין id לעורך הפוסט'],
         },
       },
     ],

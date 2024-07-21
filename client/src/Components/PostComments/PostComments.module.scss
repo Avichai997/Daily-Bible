@@ -1,0 +1,39 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+  .comment {
+    display: flex;
+    flex-direction: row;
+    padding-inline: 20px;
+    .commentDetails {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      .commentText {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex: 1;
+      }
+    }
+  }
+
+  .addComment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 20px;
+    gap: 20px;
+
+    .commentBtn {
+      background-color: var(--color-main) !important;
+      transform: translateY(8px);
+      &:hover {
+        background-color: var(--color-main-active) !important;
+      }
+    }
+  }
+}

@@ -65,6 +65,7 @@ const Post = ({ post }: PostProps) => {
     setExpanded(!expanded);
   };
   const imageSrc = `${VITE_API_URL}/img/${USER_QUERY_KEY}/${postUser.photo}`;
+  const userFullName = `${postUser.firstName} ${postUser.lastName}`;
 
   return (
     <Card
@@ -92,7 +93,7 @@ const Post = ({ post }: PostProps) => {
             <></>
           )
         }
-        title={`${postUser.firstName} ${postUser.lastName}`}
+        title={userFullName}
         subheader={new Date(post.createdAt).toLocaleString()}
       />
       <CardMedia
@@ -109,12 +110,12 @@ const Post = ({ post }: PostProps) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        {/* <IconButton>
+        <IconButton>
           <Favorite />
         </IconButton>
         <IconButton>
           <Share />
-        </IconButton> */}
+        </IconButton>
         <ExpandMoreContainer expand={expanded} onClick={handleExpandClick}>
           <ExpandMore />
         </ExpandMoreContainer>

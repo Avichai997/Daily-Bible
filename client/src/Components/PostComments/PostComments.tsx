@@ -1,65 +1,90 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { IPost } from '@ApiService/Interfaces/IPost';
+import { IPost, PostComment } from '@ApiService/Interfaces/IPost';
 import { useUser } from '@ApiService/Requests/useUser';
+import { usePostCRUD } from '@ApiService/Requests/usePosts';
+import { Avatar, Button, TextField } from '@mui/material';
+import { VITE_API_URL } from '@Utils/Environment';
+import { USER_QUERY_KEY } from '@CommonConstants';
+import classes from './PostComments.module.scss';
+import RtlProvider from '@Utils/RtlProvider';
 
-const PostComments = (post: IPost) => {
-  const [showTextbox, setShowTextbox] = useState(false);
+type PostCommentsProps = {
+  post: IPost;
+};
+
+const PostComments = ({ post }: PostCommentsProps) => {
   const [newComment, setNewComment] = useState('');
   const { comments } = post;
-  const handleAddCommentClick = () => {
-    setShowTextbox(!showTextbox);
-  };
+
   const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewComment(e.target.value);
   };
   const { user } = useUser();
-
-  // Placeholder for the actual save function
-  const saveCommentToDatabase = async (comment: string) => {
-    try {
-      const newComment = { comment, user: user?.id };
-
-      const response = await axios.patch(
-        `http://localhost:5000/posts/${post?.id || post?._id}/comments/`,
-        { comments: [...comments, newComment] }, // Spread the existing comments and add the new one
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      comments.push(newComment);
-    } catch (error) {}
-  };
+  const { updatePost } = usePostCRUD();
 
   const handleSaveComment = async () => {
-    await saveCommentToDatabase(newComment);
-    setShowTextbox(false); // Hide the textbox after saving
-    setNewComment(''); // Reset the comment input
+    if (!post?.id || !user?.id) return;
+    const newCommentObject: PostComment = {
+      comment: newComment,
+      user: user.id,
+      createdAt: new Date().toISOString(),
+    };
+    const comments: IPost['comments'] = structuredClone(post.comments || []);
+    comments.push(newCommentObject);
+
+    updatePost(post.id, {
+      comments,
+    });
+    setNewComment('');
   };
 
   return (
-    <div>
-      <button onClick={handleAddCommentClick}>הוסף תגובה</button>
-      {showTextbox && (
-        <div>
-          <input type='text' value={newComment} onChange={handleCommentChange} />
-          <button onClick={handleSaveComment}>שלח</button>
+    <div className={classes.comments}>
+      תגובות:
+      {comments.map(({ comment, user, createdAt }, index) => (
+        <div key={index}>
+          {typeof user === 'object' ? (
+            <div className={classes.comment}>
+              <Avatar
+                sx={{
+                  marginLeft: 2,
+                }}
+                src={`${VITE_API_URL}/img/${USER_QUERY_KEY}/${user.photo}`}
+              />
+              <div className={classes.commentDetails}>
+                <p>{`${user.firstName} ${user.lastName}`}</p>
+
+                <div className={classes.commentText}>
+                  <p>{comment}</p>
+                  <div>{new Date(createdAt).toLocaleString().replace(',', '')}</div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-      )}
-      {comments
-        ?.slice()
-        .reverse()
-        .map((comment, index) => (
-          <div key={index}>
-            <p>
-              {comment.user}:{comment.comment}
-            </p>
-          </div>
-        ))}
+      ))}
+      <RtlProvider>
+        <div className={classes.addComment}>
+          <TextField
+            variant='standard'
+            value={newComment}
+            onChange={handleCommentChange}
+            label='הוסף תגובה'
+            fullWidth
+            margin='normal'
+          />
+          <Button
+            variant='contained'
+            color='primary'
+            className={classes.commentBtn}
+            onClick={handleSaveComment}
+          >
+            הגב
+          </Button>
+        </div>
+      </RtlProvider>
     </div>
   );
 };

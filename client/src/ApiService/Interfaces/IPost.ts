@@ -1,15 +1,19 @@
 import { IUser } from './IUser';
 
+type PopulatedUser = Pick<IUser, '_id' | 'id' | 'firstName' | 'lastName' | 'photo'>;
+
+export type PostComment = {
+  comment: string;
+  user: PopulatedUser | string;
+  createdAt: string;
+};
 export interface IPost {
   id?: string;
-  authorId: Pick<IUser, '_id' | 'id' | 'firstName' | 'lastName' | 'photo'>;
+  authorId: PopulatedUser;
   title: string;
   content: string;
   photo: string;
-  comments?: {
-    comment: string;
-    user: string;
-  }[];
+  comments: PostComment[];
   imageFieldName?: 'photo';
   createdAt: string;
   updatedAt: string;

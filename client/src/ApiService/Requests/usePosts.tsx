@@ -37,9 +37,11 @@ export const usePostCRUD = () => {
     IMutation<ICreatePostRequest>
   >({});
 
-  const { mutate: UpdatePost, ...updateMutateInfo } = useMutation<IPost, unknown, IMutation<IPost>>(
-    {}
-  );
+  const { mutate: UpdatePost, ...updateMutateInfo } = useMutation<
+    IPost,
+    unknown,
+    IMutation<Partial<IPost>>
+  >({});
 
   const { mutate: DeletePost, ...deleteMutateInfo } = useMutation<
     string,
@@ -61,6 +63,7 @@ export const usePostCRUD = () => {
       {
         onSuccess: (createdPost) => {
           updateRQCacheAfterCreate(createdPost, queryClient, POSTS_QUERY_KEY);
+          // queryClient.invalidateQueries({ queryKey: [POSTS_QUERY_KEY] });
           ToastSuccess('הפוסט נוצר בהצלחה');
           navigate(`/PostEditForm/${createdPost.id}`);
         },
@@ -71,8 +74,8 @@ export const usePostCRUD = () => {
 
   const updatePost = (
     id: string,
-    data: IPost,
-    options?: UseMutationOptions<IPost, unknown, IMutation<IPost>>
+    data: Partial<IPost>,
+    options?: UseMutationOptions<IPost, unknown, IMutation<Partial<IPost>>>
   ) => {
     UpdatePost(
       {
