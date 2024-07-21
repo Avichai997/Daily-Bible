@@ -150,7 +150,6 @@ export const useAuth = () => {
     path: string = 'login',
     options?: UseMutationOptions<ILoginSignupResponse, unknown, IMutation<ILoginRequest>>
   ) => {
-    console.log(JSON.stringify(data));
     LoginUser(
       {
         method: 'Post',

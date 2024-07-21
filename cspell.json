@@ -1,8 +1,20 @@
 {
   "version": "0.2",
-  "dictionaries": ["he", "sql", "npm", "csharp", "bash", "html", "typescript", "node", "css"],
+  "dictionaries": [
+    "he",
+    "sql",
+    "npm",
+    "csharp",
+    "bash",
+    "html",
+    "typescript",
+    "node",
+    "css"
+  ],
   "dictionaryDefinitions": [],
-  "import": ["client/node_modules/@cspell/dict-he/cspell-ext.json"],
+  "import": [
+    "client/node_modules/@cspell/dict-he/cspell-ext.json"
+  ],
   "useGitignore": true,
   "ignorePaths": [
     "client/src/Assets",
@@ -122,6 +134,7 @@
     "התמונה",
     "וטוקן",
     "ומעלה",
+    "וסיסמא",
     "חובה",
     "חייב",
     "חשון",

@@ -15,7 +15,7 @@ import {
   JWT_SECRET,
   // CLIENT_URL
 } from '@Utils/environment';
-import { isJwtValid } from '@Utils/jti';
+import isJwtValid from '@Utils/jti';
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -153,7 +153,8 @@ export const loginWithGgl = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   // 1) Check if google validation valid
-  if (!isJwtValid(password, email)) return next(new AppError('יש להזדהות דרך google או לשלוח שם משתמש וסיסמא תקינים.', 400));
+  if (!isJwtValid(password, email))
+    return next(new AppError('יש להזדהות דרך google או לשלוח שם משתמש וסיסמא תקינים.', 400));
 
   // 2) Check if email and password exist
   if (!email) return next(new AppError('כתובת מייל או סיסמה חסרים! יש לנסות שוב מחדש.', 400));
