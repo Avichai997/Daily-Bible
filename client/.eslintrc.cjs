@@ -21,7 +21,12 @@ module.exports = {
     'plugin:@cspell/recommended',
   ],
   plugins: ['react', 'react-hooks', '@typescript-eslint', '@tanstack/query', 'prettier'],
-  ignorePatterns: ['build*', 'src/Assets', 'ecosystem.config.js'],
+  ignorePatterns: [
+    'build*',
+    'src/Assets',
+    'ecosystem.config.js',
+    'src/Components/Spotify/utils/studyBoard.xlsx',
+  ],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {

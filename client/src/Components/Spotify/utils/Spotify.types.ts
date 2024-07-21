@@ -1,7 +1,7 @@
 /* eslint-disable @cspell/spellchecker */
 export interface ISpotifySearchResponse {
   versions: IVersion[];
-  available_versions: IAvailableversion[];
+  available_versions: IAvailableVersion[];
   ref: string;
   heRef: string;
   sections: string[];
@@ -38,7 +38,7 @@ export interface ISpotifySearchResponse {
   warnings: unknown[];
 }
 // eslint-disable-next-line @cspell/spellchecker
-interface IAvailableversion {
+interface IAvailableVersion {
   status: string;
   priority: number | string;
   license: string;

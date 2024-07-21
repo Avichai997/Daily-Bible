@@ -1,5 +1,5 @@
 import { FC, useMemo, useState } from 'react';
-import { getBookAndChapters } from '@Components/Spotfy/utils/searchDay';
+import { getBookAndChapters } from '@Components/Spotify/utils/searchDay';
 import Bible from '../Bible';
 
 export const LessonContainer: FC = () => {
