@@ -1,16 +1,16 @@
- .content {
-    margin-top: 20px;
-    width: 100%;
-    font-size: 20px;
-    color: dimgrey;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: initial;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-  }
+.content {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 20px;
+  color: dimgrey;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
 
 .container {
   width: 400px;

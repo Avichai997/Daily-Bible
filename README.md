@@ -153,3 +153,12 @@ sudo npm install -g pm2
 # Clone the GitHub repository:
 
 git clone https://github.com/Avichai997/Daily-Bible.git
+
+<!-- Create .env file: -->
+
+cd <FOLDER_NAME>
+
+cat <<EOL > .env.production
+<!-- .env CONTENT GOES HERE: -->
+EOL
+

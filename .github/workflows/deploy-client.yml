@@ -26,10 +26,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/bibleKey.pem ubuntu@ec2-13-50-54-221.eu-north-1.compute.amazonaws.com << 'EOF'
             cd Daily-Bible
             git reset --hard origin/main
+            git pull
             cd client
             npm set legacy-peer-deps true
-            rm -rf node_modules
-            npm cache clean --force
             npm install
             npm run build:prod
             pm2 startOrRestart ecosystem.config.cjs --only client || pm2 start ecosystem.config.cjs --only client
