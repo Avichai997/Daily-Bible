@@ -11,7 +11,7 @@ import userRouter from '@Routes/userRouter';
 import postRouter from '@Routes/postRouter';
 import {
   helmetMiddleware,
-  corsMiddleware,
+  // corsMiddleware,
   xssMiddleware,
   limiterMiddleware,
   mongoSanitizeMiddleware,
@@ -33,7 +33,7 @@ app.use(compression());
 
 // Security middlewares
 app.use(helmetMiddleware);
-app.use(corsMiddleware);
+// app.use(corsMiddleware);
 app.use(morgan('dev'));
 app.use(xssMiddleware);
 
