@@ -31,7 +31,7 @@ const createSendToken = (user: IUsers, statusCode: number, req: Request, res: Re
   res.cookie('token', token, {
     expires: tokenExpiration,
     httpOnly: true,
-    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    // secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
   });
 
   // Remove password from output
