@@ -19,7 +19,7 @@ const helmetMiddleware = helmet({
 });
 
 // CORS
-const whitelist = [CLIENT_URL, `http://localhost:${PORT}`];
+const whitelist = [CLIENT_URL, `http://localhost:${PORT}`, '*'];
 const corsOptions: CorsOptions = {
   credentials: true, // allow cookies
   origin: (origin, callback) => {
