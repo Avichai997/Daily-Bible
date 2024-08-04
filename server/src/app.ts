@@ -9,6 +9,7 @@ import globalErrorHandler from '@Controllers/errorController';
 import AppError from '@Utils/AppError';
 import userRouter from '@Routes/userRouter';
 import postRouter from '@Routes/postRouter';
+import logsRouter from '@Routes/logRouter';
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -47,6 +48,7 @@ app.use(hppMiddleware);
 // 2) ROUTES
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
+app.use('/api/logs', logsRouter);
 
 app.get('/api/health', (_req, res) => res.status(StatusCodes.OK).json(`Server is healthy`));
 app.all('*', (req, _res, next) =>

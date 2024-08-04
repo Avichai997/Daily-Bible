@@ -5,6 +5,7 @@ export const USER_QUERY_KEY = 'users';
 export const POSTS_QUERY_KEY = 'posts';
 export const DAILY_LESSONS_KEY = 'dailyLessons';
 export const DAILY_LESSON_SOURCE_KEY = 'dailyLessons';
+export const LOGS_QUERY_KEY = 'logs';
 
 // Error Boundary Fallback
 export const SHOW_ERROR_MSG = 'הצג שגיאה';
@@ -18,3 +19,4 @@ export const SOME_CONST_NAME = 'some const text';
 
 // App.tsx
 export const ROUTE_NOT_FOUND = 'No Route Found!';
+
