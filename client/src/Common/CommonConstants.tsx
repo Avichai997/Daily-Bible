@@ -19,4 +19,3 @@ export const SOME_CONST_NAME = 'some const text';
 
 // App.tsx
 export const ROUTE_NOT_FOUND = 'No Route Found!';
-

@@ -1,6 +1,6 @@
 import { IUserLocalStorage } from '@ApiService/Interfaces/IUser';
 import { useUser } from '@ApiService/Requests/useUser';
-import { USER_QUERY_KEY } from '@Common/CommonConstants';
+import { USER_QUERY_KEY } from '@CommonConstants';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
