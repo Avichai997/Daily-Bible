@@ -17,9 +17,11 @@ import {
   PostsPage,
 } from '@Utils/LazySuspense';
 import { LessonContainer } from '@Pages/Bible/LessonContainer/LessonContainer';
+import { useLog } from '@Hooks/useLog';
 
 const App = () => {
   useUser();
+  useLog({ action: 1, description: 'start app' });
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
